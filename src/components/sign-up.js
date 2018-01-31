@@ -24,7 +24,7 @@ class SignupForm extends Component {
         console.log('sign-up-form, username: ');
         console.log(this.state.username);
 		//request to server here
-		axios.post('/user/signup', {
+		axios.post('/', {
 			username: this.state.username,
 			password: this.state.password
 		})
