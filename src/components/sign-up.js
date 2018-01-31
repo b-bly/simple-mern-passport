@@ -24,7 +24,7 @@ class SignupForm extends Component {
 		console.log('sign-up-form, username: ');
 		console.log(this.state.username);
 		//request to server here
-		axios.post('/', {
+		axios.post('/user/', {
 			username: this.state.username,
 			password: this.state.password
 		})
@@ -54,8 +54,9 @@ class SignupForm extends Component {
 						<div className="col-3 col-mr-auto">
 							<input className="form-input"
 								type="text"
-								id="input-example-1"
-								placeholder="Name"
+								id="username"
+								name="username"
+								placeholder="Username"
 								value={this.state.username}
 								onChange={this.handleChange}
 							/>
