@@ -14,7 +14,7 @@ class App extends Component {
        <Signup />
       </div>
     );
-  }
+  } 
 }
 
 export default App;
