@@ -7,7 +7,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
 ## Table of Contents
 
 - [About](#about)
-
+ 
 
 # About
 I couldn't find a simple MERN passport tutorial, so I made one!
