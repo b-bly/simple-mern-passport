@@ -1,8 +1,11 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const dbConnection = require('./database') 
 const app = express()
 const PORT = 8080
+//routes
+const user = require('./routes/user')
 
 // MIDDLEWARE
 app.use(morgan('dev'))
@@ -13,11 +16,8 @@ app.use(
 )
 app.use(bodyParser.json())
 
-app.post('/', (req, res, next) =>{
-    console.log('user/signup, req.body.username: ')
-    console.log(req.body.username);
-    
-});
+//routing
+app.use('/user', user)
 
 // Starting Server 
 app.listen(PORT, () => {
