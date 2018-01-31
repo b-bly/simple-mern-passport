@@ -24,6 +24,21 @@ class SignupForm extends Component {
         console.log('sign-up-form, username: ');
         console.log(this.state.username);
 		//request to server here
+		axios.post('/', {
+			username: this.state.username,
+			password: this.state.password
+		})
+		.then(response => {
+			console.log(response)
+			if (!response.data.errmsg) {
+				console.log('successful signup')
+				this.setState({
+					redirectTo: '/login'
+				})
+			} else {
+				console.log('username already taken')
+			}
+		})
 
 	}
 	render() {
