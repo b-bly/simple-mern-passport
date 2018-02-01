@@ -7,7 +7,8 @@ You can find the most recent version of this guide [here](https://github.com/fac
 ## Table of Contents
 
 - [About](#about)
-
+- [Instructions](#instructions)
+  - []
 
 # About
 I couldn't find a simple MERN passport tutorial, so I made one!
@@ -38,17 +39,19 @@ Run this command in the terminal:
 npm install
 npm run dev
 
+# Instructions
+
+
+
 ### Completed Features
 
-
-
-### Next Steps
-
-Features that you would like to add at some point in the future.
 - [ ] Sign up, login and logout.
 - [ ] Authentication with passport and bcryptjs.
 - [ ] Session information stored with express sessions.
 - [ ] Store data for production in sessions with connect-mongo
+
+### Next Steps
+
 - [ ] Add redux
 
 ## Author
