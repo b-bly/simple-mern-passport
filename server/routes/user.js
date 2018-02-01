@@ -7,20 +7,24 @@ router.post('/', (req, res) => {
 
     const { username, password } = req.body
     // ADD VALIDATION
-    User.findOne({ username: username }, (err, userMatch) => {
-        if (userMatch) {
-            return res.json({
+    User.findOne({ username: username }, (err, user) => {
+        if (err) {
+            console.log('User.js post error: ', err)
+        } else if (user) {
+            res.json({
                 error: `Sorry, already a user with the username: ${username}`
             })
         }
-        const newUser = new User({
-            username: username,
-            password: password
-        })
-        newUser.save((err, savedUser) => {
-            if (err) return res.json(err)
-            return res.json(savedUser)
-        })
+        else {
+            const newUser = new User({
+                username: username,
+                password: password
+            })
+            newUser.save((err, savedUser) => {
+                if (err) return res.json(err)
+                res.json(savedUser)
+            })
+        }
     })
 })
 
