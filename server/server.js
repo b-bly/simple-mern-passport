@@ -3,9 +3,10 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const session = require('express-session')
 const dbConnection = require('./database') 
+const passport = require('./passport');
 const app = express()
 const PORT = 8080
-//route requires
+// Route requires
 const user = require('./routes/user')
 
 // MIDDLEWARE
@@ -17,15 +18,21 @@ app.use(
 )
 app.use(bodyParser.json())
 
-//sessions
+// Sessions
 app.use(
 	session({
 		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+		resave: false, //required
+		saveUninitialized: false //required
 	})
 )
 
+// Passport
+app.use(passport.initialize())
+app.use(passport.session()) // calls the deserializeUser
 
-// routes
+
+// Routes
 app.use('/user', user)
 
 // Starting Server 
