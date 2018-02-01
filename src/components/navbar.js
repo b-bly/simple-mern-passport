@@ -17,13 +17,13 @@ class Navbar extends Component {
 					{loggedIn ? (
 						<section className="navbar-section">
 							<Link to="#" className="btn btn-link" onClick={this.props.logout}>
-								Logout</Link>
+								logout</Link>
 						
 						</section>
 					) : (
 							<section className="navbar-section">
 								<Link to="/" className="btn btn-link">
-									Home</Link>
+									home</Link>
 								<Link to="/login" className="btn btn-link">
 									login
 				</Link>
