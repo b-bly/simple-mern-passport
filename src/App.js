@@ -18,11 +18,12 @@ class App extends Component {
     this.logout = this.logout.bind(this)
     this.login = this.login.bind(this)
     this.getUser = this.getUser.bind(this)
+    this.signup = this.signup.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
   }
 
   componentDidMount() {
-    this.getUser()
+    //this.getUser()
   }
   getUser() {
     axios.get('/user/').then(response => {
@@ -46,8 +47,7 @@ class App extends Component {
   }
 
   signup(username, password) {
-    console.log('sign-up-form, username: ');
-    console.log(this.state.username);
+
     //request to server here
     axios.post('/user/', {
       username: username,

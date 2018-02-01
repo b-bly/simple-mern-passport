@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-
-class SignupForm extends Component {
+class Signup extends Component {
 	constructor() {
 		super()
 		this.state = {
@@ -20,12 +19,14 @@ class SignupForm extends Component {
 		})
 	}
 	handleSubmit(event) {
-			event.preventDefault()
-			console.log('handleSubmit')
-			this.props.signup(this.state.username, this.state.password)
-			this.setState({
-				redirectTo: '/'
-			})
+		console.log('sign-up, username: ');
+		console.log(this.state.username);
+		event.preventDefault()
+		console.log('handleSubmit')
+		this.props.signup(this.state.username, this.state.password)
+		this.setState({
+			redirectTo: '/'
+		})
 
 	}
 	render() {
@@ -64,7 +65,11 @@ class SignupForm extends Component {
 					</div>
 					<div className="form-group ">
 						<div className="col-7"></div>
-						<button className="btn btn-primary col-1 col-mr-auto" onClick={this.handleSubmit}>Sign up</button>
+						<button
+							className="btn btn-primary col-1 col-mr-auto"
+							onClick={this.handleSubmit}
+							type="submit"
+						>Sign up</button>
 					</div>
 				</form>
 			</div>
@@ -73,4 +78,4 @@ class SignupForm extends Component {
 	}
 }
 
-export default SignupForm
+export default Signup
