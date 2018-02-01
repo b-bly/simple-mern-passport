@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
 import axios from 'axios'
 import { Route, Link } from 'react-router-dom'
 import Signup from './components/sign-up'
@@ -101,14 +100,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>MERN Passport</h1>
-
-
+   
         <Navbar logout={this.logout} loggedIn={this.state.loggedIn} />
-        <hr></hr>
         {/* greet user if logged in: */}
         {this.state.loggedIn &&
-          <p>Welcome {this.state.username}</p>
+          <p>Join the party, {this.state.username}!</p>
         }
         {/* Routes to different components */}
         <Route
@@ -127,11 +123,11 @@ class App extends Component {
             <Signup
               signup={this.signup}
             />}
-            />
+        />
 
-			</div>
-		);
-	}
+      </div>
+    );
+  }
 }
 
 export default App;
