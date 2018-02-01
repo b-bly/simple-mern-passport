@@ -11,6 +11,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">MERN Passport</h1>
         </header>
+        
        <Signup />
       </div>
     );
