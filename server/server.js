@@ -23,10 +23,7 @@ app.use(
 		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
 	})
 )
-app.use( (req, res, next) => {
-	console.log('req.session', req.session);
-	return next();
-  });
+
 
 // routes
 app.use('/user', user)
