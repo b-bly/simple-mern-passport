@@ -32,15 +32,34 @@ git checkout step-1
 - [Node.js](https://nodejs.org/en/)
 - [MongoDB](https://www.mongodb.com/)
 - [Nodemon](https://github.com/remy/nodemon)
+- [create-react-app](https://github.com/facebook/create-react-app)
 
 ### Installing
 
-Run this command in the terminal:
+Run these commands in the terminal:
+
+```
 npm install
 npm run dev
+```
 
 # Instructions
 
+## Step 1 
+*Create react app*
+
+In the terminal, navigate to the folder you want to have your app and run this command:
+
+`create-react-app your-app-name`
+
+Then 
+```
+cd your-app-name
+npm start
+```
+For more info on create-react-app follow the link in [prerequisites](#prerequisites).
+
+## Step 2
 
 
 ### Completed Features
