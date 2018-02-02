@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
+import axios from 'axios'
 
 class LoginForm extends Component {
     constructor() {
@@ -11,6 +12,7 @@ class LoginForm extends Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
+  
     }
 
     handleChange(event) {
@@ -22,10 +24,31 @@ class LoginForm extends Component {
     handleSubmit(event) {
         event.preventDefault()
         console.log('handleSubmit')
-        this.props.login(this.state.username, this.state.password)
-        this.setState({
-            redirectTo: '/'
-        })
+
+        axios
+            .post('/user/login', {
+                username: this.state.username,
+                password: this.state.password
+            })
+            .then(response => {
+                console.log('login response: ')
+                console.log(response)
+                if (response.status === 200) {
+                    // update App.js state
+                    this.props.updateUser({
+                        loggedIn: true,
+                        username: response.data.username
+                    })
+                    // update the state to redirect to home
+                    this.setState({
+                        redirectTo: '/'
+                    })
+                }
+            }).catch(error => {
+                console.log('login error: ')
+                console.log(error);
+                
+            })
     }
 
     render() {
@@ -67,10 +90,11 @@ class LoginForm extends Component {
                         </div>
                         <div className="form-group ">
                             <div className="col-7"></div>
-                            <button 
-                            className="btn btn-primary col-1 col-mr-auto" 
-                            onClick={this.handleSubmit}
-                            type="submit">Login</button>
+                            <button
+                                className="btn btn-primary col-1 col-mr-auto"
+                               
+                                onClick={this.handleSubmit}
+                                type="submit">Login</button>
                         </div>
                     </form>
                 </div>
