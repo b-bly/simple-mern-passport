@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
 import axios from 'axios'
 import { Route, Link } from 'react-router-dom'
+// components
 import Signup from './components/sign-up'
 import LoginForm from './components/login-form'
 import Navbar from './components/navbar'
@@ -14,16 +14,20 @@ class App extends Component {
       loggedIn: false,
       username: null
     }
-    this.logout = this.logout.bind(this)
-    this.login = this.login.bind(this)
+
     this.getUser = this.getUser.bind(this)
-    this.signup = this.signup.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
+    this.updateUser = this.updateUser.bind(this)
   }
 
   componentDidMount() {
-    //this.getUser()
+    this.getUser()
   }
+
+  updateUser (userObject) {
+    this.setState(userObject)
+  }
+
   getUser() {
     axios.get('/user/').then(response => {
       console.log('Get user response: ')
@@ -45,63 +49,11 @@ class App extends Component {
     })
   }
 
-  signup(username, password) {
-
-    //request to server here
-    axios.post('/user/', {
-      username: username,
-      password: password
-    })
-      .then(response => {
-        console.log(response)
-        if (!response.data.errmsg) {
-          console.log('successful signup')
-          this.setState({
-            redirectTo: '/login'
-          })
-        } else {
-          console.log('username already taken')
-        }
-      })
-  }
-
-  logout(event) {
-    event.preventDefault()
-    console.log('logging out')
-    axios.post('/user/logout').then(response => {
-      console.log(response.data)
-      if (response.status === 200) {
-        this.setState({
-          loggedIn: false,
-          username: null
-        })
-      }
-    })
-  }
-
-  login(username, password) {
-    axios
-      .post('/user/login', {
-        username,
-        password
-      })
-      .then(response => {
-        console.log('login response: ')
-        console.log(response)
-        if (response.status === 200) {
-          // update the state
-          this.setState({
-            loggedIn: true,
-            username: response.data.username
-          })
-        }
-      })
-  }
   render() {
     return (
       <div className="App">
    
-        <Navbar logout={this.logout} loggedIn={this.state.loggedIn} />
+        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
         {/* greet user if logged in: */}
         {this.state.loggedIn &&
           <p>Join the party, {this.state.username}!</p>
@@ -114,7 +66,7 @@ class App extends Component {
           path="/login"
           render={() =>
             <LoginForm
-              login={this.login}
+              updateUser={this.updateUser}
             />}
         />
         <Route
