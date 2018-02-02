@@ -59,6 +59,7 @@ class SignupForm extends Component {
 								type="text"
 								id="input-example-1"
 								placeholder="Name"
+								name="username"
 								value={this.state.username}
 								onChange={this.handleChange}
 							/>
@@ -70,7 +71,7 @@ class SignupForm extends Component {
 						</div>
 						<div className="col-3 col-mr-auto">
 							<input className="form-input"
-								placeholder="password"
+								placeholder="Password"
 								type="password"
 								name="password"
 								value={this.state.password}
