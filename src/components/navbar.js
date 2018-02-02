@@ -3,12 +3,30 @@ import { Redirect } from 'react-router-dom'
 import { Route, Link } from 'react-router-dom'
 import logo from '../logo.svg';
 import '../App.css';
+import axios from 'axios'
 
 class Navbar extends Component {
-    constructor(props) {
-        super(props);
-
+    constructor() {
+        super()
+        this.logout = this.logout.bind(this)
     }
+
+    logout(event) {
+        event.preventDefault()
+        console.log('logging out')
+        axios.post('/user/logout').then(response => {
+          console.log(response.data)
+          if (response.status === 200) {
+            this.props.updateUser({
+              loggedIn: false,
+              username: null
+            })
+          }
+        }).catch(error => {
+            console.log('Logout error')
+        })
+      }
+
     render() {
         const loggedIn = this.props.loggedIn;
         console.log('navbar render, props: ')
@@ -21,7 +39,7 @@ class Navbar extends Component {
                     <div className="col-4" >
                         {loggedIn ? (
                             <section className="navbar-section">
-                                <Link to="#" className="btn btn-link text-secondary" onClick={this.props.logout}>
+                                <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
                                 <span className="text-secondary">logout</span></Link>
 
                             </section>
