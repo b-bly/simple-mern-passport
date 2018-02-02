@@ -30,16 +30,19 @@ class SignupForm extends Component {
 		})
 			.then(response => {
 				console.log(response)
-				if (!response.data.errmsg) {
+				if (response.data) {
 					console.log('successful signup')
 					this.setState({
 						redirectTo: '/login'
 					})
 				} else {
-					console.log('username already taken')
-				}
+						console.log('Sign-up error');
+						
+					}
+			}).catch(error => {
+				console.log('Sign up server error: ')
+				console.log(error);
 			})
-
 	}
 	render() {
 
