@@ -21,12 +21,21 @@ app.use(bodyParser.json())
 app.use(
 	session({
 		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+		resave: false, //required
+		saveUninitialized: false //required
 	})
 )
+
 app.use( (req, res, next) => {
 	console.log('req.session', req.session);
-	return next();
+	next()
   });
+
+//   app.post('/user', (req, res) => {
+//     console.log('user signup');
+// 	req.session.username = req.body.username;
+// 	res.end()
+// })
 
 // routes
 app.use('/user', user)
