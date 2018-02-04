@@ -33,7 +33,6 @@ router.post(
     '/login',
     function (req, res, next) {
         console.log('routes/user.js, login, req.body: ');
-        
         console.log(req.body)
         next()
     },
@@ -59,6 +58,7 @@ router.get('/', (req, res, next) => {
 
 router.post('/logout', (req, res) => {
     if (req.user) {
+        req.logout()
         res.send({ msg: 'logging out' })
     } else {
         res.send({ msg: 'no user to log out' })
