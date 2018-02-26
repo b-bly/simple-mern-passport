@@ -39,22 +39,17 @@ npm install
 npm run dev
 
 ### Completed Features
-
-
-
-### Next Steps
-
-Features that you would like to add at some point in the future.
 - [ ] Sign up, login and logout.
 - [ ] Authentication with passport and bcryptjs.
 - [ ] Session information stored with express sessions.
 - [ ] Store data for production in sessions with connect-mongo
+
+### Next Steps
 - [ ] Add redux
 
 ## Author
 
 Brendt Bly
-
 
 ## Acknowledgments
 
