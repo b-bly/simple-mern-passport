@@ -37,6 +37,9 @@ npm install
 npm run dev
 ```
 
+<<<<<<< HEAD
+### Completed Features
+=======
 # Instructions
 
 ## Step 1 
@@ -58,19 +61,22 @@ For more info on create-react-app follow the link in [prerequisites](#prerequisi
 
 ### Completed Features
 
+>>>>>>> master
 - [ ] Sign up, login and logout.
 - [ ] Authentication with passport and bcryptjs.
 - [ ] Session information stored with express sessions.
 - [ ] Store data for production in sessions with connect-mongo
 
 ### Next Steps
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
 - [ ] Add redux
 
 ## Author
 
 Brendt Bly
-
 
 ## Acknowledgments
 
