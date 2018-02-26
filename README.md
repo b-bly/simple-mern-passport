@@ -37,41 +37,18 @@ npm install
 npm run dev
 ```
 
-<<<<<<< HEAD
-### Completed Features
-=======
 # Instructions
 
-## Step 1 
-*Create react app*
-
-In the terminal, navigate to the folder you want to have your app and run this command:
-
-`create-react-app your-app-name`
-
-Then 
-```
-cd your-app-name
-npm start
-```
-For more info on create-react-app follow the link in [prerequisites](#prerequisites).
-
-## Step 2
-
+Complete instructions at https://medium.com/@brendt_bly/simple-mern-passport-app-tutorial-4aec2105e367
 
 ### Completed Features
 
->>>>>>> master
 - [ ] Sign up, login and logout.
 - [ ] Authentication with passport and bcryptjs.
 - [ ] Session information stored with express sessions.
 - [ ] Store data for production in sessions with connect-mongo
 
 ### Next Steps
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 - [ ] Add redux
 
 ## Author
