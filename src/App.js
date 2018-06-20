@@ -72,9 +72,7 @@ class App extends Component {
         <Route
           path="/signup"
           render={() =>
-            <Signup
-              signup={this.signup}
-            />}
+            <Signup/>}
         />
 
       </div>
