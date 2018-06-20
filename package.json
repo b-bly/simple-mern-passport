@@ -27,7 +27,8 @@
     "dev": "concurrently \"react-scripts start\" \"nodemon server/server.js\""
   },
   "devDependencies": {
-    "concurrently": "^3.5.1"
+    "concurrently": "^3.5.1",
+    "nodemon": "^1.17.5"
   },
   "proxy": "http://localhost:8080"
 }

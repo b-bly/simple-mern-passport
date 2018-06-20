@@ -33,6 +33,7 @@ git checkout step-1
 Run these commands in the terminal:
 
 ```
+cd simple-mern-passport
 npm install
 npm run dev
 ```
