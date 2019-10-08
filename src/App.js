@@ -74,7 +74,13 @@ class App extends Component {
           render={() =>
             <Signup/>}
         />
-
+        {/* route for channels */}
+        <Route
+          path="/channels"
+          render={() =>
+            //render channels
+            <Signup/>}
+        />
       </div>
     );
   }
