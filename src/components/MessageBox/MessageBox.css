@@ -1,0 +1,9 @@
+#message-box {
+    width: 75%;
+    margin-left: 25%;
+    z-index: 1;
+}
+.form {
+    width: 100%;
+    background-color: gray;
+}

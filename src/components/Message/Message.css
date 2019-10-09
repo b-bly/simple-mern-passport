@@ -2,6 +2,7 @@
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin: 0;
+    z-index: 0;
 }
 
 #message-div {

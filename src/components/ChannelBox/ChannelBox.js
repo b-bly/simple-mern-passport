@@ -11,9 +11,7 @@ const messageStyle = {
 function ChannelBox() {
 return (
 <div style={messageStyle}>
-​
-<p>Sample Category Goes Here.</p>
-
+​<p>placeholder channel</p>
 </div>    
     )
 }
