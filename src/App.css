@@ -23,16 +23,15 @@
 }
 
 .navbar {
- 
   margin-top: auto;
-  
 }
+
 #top-filler {
   margin-bottom: auto;
 }
 
 #nav-container {
-  align-items: flex-end;
+  align-items: center;
 }
 
 @keyframes App-logo-spin {

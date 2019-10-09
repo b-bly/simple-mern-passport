@@ -3,8 +3,8 @@ import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 class LoginForm extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             username: '',
             password: '',
@@ -52,8 +52,8 @@ class LoginForm extends Component {
     }
 
     render() {
-        if (this.state.redirectTo) {
-            return <Redirect to={{ pathname: this.state.redirectTo }} />
+        if (this.props.loggedIn) {
+            return <Redirect to={'/channels'} />
         } else {
             return (
                 <div>

@@ -1,9 +1,10 @@
 #message-div p {
-    margin-block-start: 1em;
-    margin-block-end: 1em;
+    margin-block-start: 0;
+    margin-block-end: 0;
     margin: 0;
+    z-index: 0;
 }
 
 #message-div {
-    margin-top: 10px;
+    
 }
