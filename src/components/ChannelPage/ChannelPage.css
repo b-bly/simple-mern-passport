@@ -1,4 +1,4 @@
-#channels-container {
+/* #channels-container {
     margin-left:25%
 }
 .sidebar {
@@ -8,4 +8,34 @@
 
 .messages {
     overflow: auto;
-}
+} */
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    padding: 10px 16px;
+ }
+ .sidenav {
+    height: 100%;
+    width: 25%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    color: white;
+    padding-top: 100px;
+  }
+  ​
+  .sidenav p {
+    padding: 10px;
+  }
+
+  .content {
+    margin-left: 25%;
+    padding: 80px 20px;
+  }

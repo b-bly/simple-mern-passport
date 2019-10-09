@@ -23,9 +23,10 @@
 }
 
 .navbar {
-  /* position: fixed;
-  width: 100%; */
+  position: fixed;
+  width: 75%;
   margin-top: auto;
+  margin-left: 25%;
   
 }
 #top-filler {
