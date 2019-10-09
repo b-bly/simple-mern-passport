@@ -2,8 +2,21 @@
     width: 75%;
     margin-left: 25%;
     z-index: 1;
+    background-color: black;
 }
-.form {
-    width: 100%;
-    background-color: gray;
+
+#send {
+    height: 100%;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+#input-and-button {
+    width: 95%
+}
+
+#message-input {
+    height: 50%;
+    border-width:0px;
+    border:none;
 }

@@ -3,10 +3,10 @@ import axios from 'axios'
 import { Route, Link } from 'react-router-dom'
 import './components/ChannelPage/ChannelPage.css'
 // components
-import Signup from './components/sign-up'
-import LoginForm from './components/login-form'
-import Navbar from './components/navbar'
-import Home from './components/home'
+import Signup from './components/SignUp/sign-up'
+import LoginForm from './components/LoginForm/login-form'
+import Navbar from './components/Navbar/navbar'
+import Home from './components/Home/home'
 import ChannelPage from './components/ChannelPage/ChannelPage'
 
 class App extends Component {
@@ -55,7 +55,7 @@ class App extends Component {
     return (
       <div className="App">
    
-        <Navbar username={this.state.username} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+        {/* <Navbar username={this.state.username} updateUser={this.updateUser} loggedIn={this.state.loggedIn} /> */}
         {/* greet user if logged in: */}
         {/* Routes to different components */}
         <Route
@@ -68,6 +68,7 @@ class App extends Component {
           render={() =>
             <LoginForm
               updateUser={this.updateUser}
+              loggedIn={this.state.loggedIn}
             />}
         />
         <Route
@@ -80,7 +81,8 @@ class App extends Component {
           path="/channels"
           render={() =>
             //render channels
-            <ChannelPage loggedIn={this.state.loggedIn} user={this.state.username}/>}
+            <ChannelPage loggedIn={this.state.loggedIn} user={this.state.username}/>
+            }
         />
       </div>
     );

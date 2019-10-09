@@ -3,6 +3,7 @@ import Message from '../Message/Message'
 import axios from 'axios'
 import ChannelBox from '../ChannelBox/ChannelBox';
 import MessageBox from '../MessageBox/MessageBox';
+import ChannelsNav from '../ChannelsNav/ChannelsNav'
 
 class ChannelPage extends React.Component {
     constructor(props) {
@@ -35,6 +36,7 @@ class ChannelPage extends React.Component {
             if(this.props.loggedIn) {
             return (
                 <div>
+                    <ChannelsNav />
                     <div className="sidenav">
                         <h4>Add a channel</h4>
     
@@ -57,6 +59,15 @@ class ChannelPage extends React.Component {
                     </div>
                     <div className="content">
                         <Message />
+                        <Message />
+                        <Message />
+                        <Message />
+                        <Message />
+                        <Message />
+                        <Message />
+                        <Message />
+                        <Message />
+
                     </div>
                     <div className="footer">
                         <MessageBox />

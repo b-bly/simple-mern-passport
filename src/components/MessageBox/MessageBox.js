@@ -4,13 +4,15 @@ import './MessageBox.css'
 function MessageBox() {
 return (
 
-<div id="message-box" className="navbar fixed-bottom">
+<div id="message-box" className="fixed-bottom">
 ​
-<form className="w3-card-4 w3-round form">
-  <p><textarea className="w3-input" placeholder="Enter Message Here"></textarea></p>
-  <p><button className="w3-btn w3-blue w3-round">Submit</button></p>
-</form>
-​
+<div id="input-and-button" className="input-group mb-3 mx-auto">
+  <input id="message-input" type="text" className="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2"></input>
+  <div id="send-div" className="input-group-append">
+    <button id="send" className="btn btn-outline-secondary" type="button">Send</button>
+  </div>
+</div>
+
 </div>
         
     )
