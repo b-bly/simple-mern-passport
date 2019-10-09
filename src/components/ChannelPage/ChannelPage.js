@@ -7,7 +7,7 @@ import MessageBox from '../MessageBox/MessageBox';
 class ChannelPage extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {inputValue: '', loggedIn: this.props.loggedIn};
+        this.state = {inputValue: ''};
         this.handleChange = this.handleChange.bind(this);
         this.addChannel = this.addChannel.bind(this);
 
@@ -31,7 +31,8 @@ class ChannelPage extends React.Component {
     }
     
     render () {
-        {if(this.state.loggedIn) {
+        {
+            if(this.props.loggedIn) {
             return (
                 <div>
                     <div className="sidenav">
@@ -65,7 +66,7 @@ class ChannelPage extends React.Component {
         }
         else {
             return (
-                <h1>Please log in or sign up first</h1>
+                <h1>Please <a href="/login">log in</a> in or <a href="/signup">sign up</a> first</h1>
             )
         }
     }
