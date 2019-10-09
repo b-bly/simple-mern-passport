@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
 
-class Home extends Component {
-    constructor() {
-        super()
+function Home(props) {
+
+    if (props.loggedIn) {
+       return (
+           <div>
+               <h1>Go to <a href="/channels">Channels</a></h1>
+           </div>
+       )
     }
-
-
-    render() {
-        const imageStyle = {
-            width: 400
-        }
+    else {
         return (
             <div>
-                <p>It's good to be home</p>
-                <img style={imageStyle} src="https://i.ytimg.com/vi/N1icEHtgb3g/maxresdefault.jpg" />
+                <h1>To get started, <a href="/login">log in</a> or <a href="/signup">sign up</a></h1>
             </div>
         )
-
     }
+
+
 }
 
 export default Home

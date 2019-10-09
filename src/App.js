@@ -55,15 +55,14 @@ class App extends Component {
     return (
       <div className="App">
    
-        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+        <Navbar username={this.state.username} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
         {/* greet user if logged in: */}
-        {this.state.loggedIn &&
-          <p>Join the party, {this.state.username}!</p>
-        }
         {/* Routes to different components */}
         <Route
           exact path="/"
-          component={Home} />
+          render={() =>
+            <Home loggedIn={this.state.loggedIn}></Home>
+          } />
         <Route
           path="/login"
           render={() =>
@@ -81,7 +80,7 @@ class App extends Component {
           path="/channels"
           render={() =>
             //render channels
-            <ChannelPage/>}
+            <ChannelPage loggedIn={this.state.loggedIn} user={this.state.username}/>}
         />
       </div>
     );
