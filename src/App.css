@@ -23,11 +23,7 @@
 }
 
 .navbar {
-  /* position: fixed;
-  width: 75%;
   margin-top: auto;
-  margin-left: 25%;
-   */
 }
 
 #top-filler {
@@ -35,7 +31,7 @@
 }
 
 #nav-container {
-  align-items: flex-end;
+  align-items: center;
 }
 
 @keyframes App-logo-spin {

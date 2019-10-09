@@ -8,6 +8,7 @@ import LoginForm from './components/LoginForm/login-form'
 import Navbar from './components/Navbar/navbar'
 import Home from './components/Home/home'
 import ChannelPage from './components/ChannelPage/ChannelPage'
+import ChannelsNav from './components/ChannelsNav/ChannelsNav'
 
 class App extends Component {
   constructor() {
@@ -26,7 +27,7 @@ class App extends Component {
     this.getUser()
   }
 
-  updateUser (userObject) {
+  updateUser(userObject) {
     this.setState(userObject)
   }
 
@@ -54,14 +55,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-   
+
         {/* <Navbar username={this.state.username} updateUser={this.updateUser} loggedIn={this.state.loggedIn} /> */}
         {/* greet user if logged in: */}
         {/* Routes to different components */}
         <Route
           exact path="/"
           render={() =>
-            <Home loggedIn={this.state.loggedIn}></Home>
+            <div>
+              <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+              <Home loggedIn={this.state.loggedIn} />
+            </div>
           } />
         <Route
           path="/login"
@@ -74,15 +78,18 @@ class App extends Component {
         <Route
           path="/signup"
           render={() =>
-            <Signup/>}
+            <Signup />}
         />
         {/* route for channels */}
         <Route
           path="/channels"
           render={() =>
             //render channels
-            <ChannelPage loggedIn={this.state.loggedIn} user={this.state.username}/>
-            }
+            <div>
+            <ChannelsNav updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+            <ChannelPage updateUser={this.updateUser} loggedIn={this.state.loggedIn} user={this.state.username} />
+            </div>
+          }
         />
       </div>
     );

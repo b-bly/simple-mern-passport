@@ -1,5 +1,6 @@
-.navbar {
+.channels-navbar {
     position: fixed;
+    display: flex;
     width: 75%;
     margin-left: 25%;
     background-color: black;

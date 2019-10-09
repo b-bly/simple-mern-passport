@@ -36,7 +36,7 @@ class ChannelPage extends React.Component {
             if(this.props.loggedIn) {
             return (
                 <div>
-                    <ChannelsNav />
+
                     <div className="sidenav">
                         <h4>Add a channel</h4>
     

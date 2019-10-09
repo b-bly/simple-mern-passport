@@ -32,15 +32,15 @@ class Navbar extends Component {
         const loggedIn = this.props.loggedIn;
         console.log('navbar render, props: ')
         console.log(this.props);
-
+        //Note to self: log out function being called on the logout button is causing it to not redirect, ask sam about this tomorrow
         return (
             <div>
 
-                <header className="navbar App-header" id="nav-container">
+                <header className="channels-navbar App-header" id="nav-container">
                     <div className="col-4" >
                         {loggedIn ? (
                             <section className="navbar-section">
-                                <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
+                                <Link to="/" className="btn btn-link text-secondary" onClick={this.logout}>
                                     <span className="text-secondary">logout</span></Link>
                                     {/* <p>Join the party, {this.props.username}!</p> */}
                                 
