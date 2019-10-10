@@ -5,6 +5,7 @@ mongoose.promise = Promise
 // Define userSchema
 const channelSchema = new Schema({
 
+    ChannelName: String,
     users: [],
     messages: []
     
