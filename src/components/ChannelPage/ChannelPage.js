@@ -20,9 +20,18 @@ class ChannelPage extends React.Component {
     componentDidMount() {
         axios({
             method: 'get',
-            url: '/user',
-        }).then(function (data) {
+            url: '/user/',
+        }).then((data) => {
             console.log(data)
+            let channelsArray = [];
+            //console.log(data.data[0]);
+            data.data.response[0].channels.map((channel) => {
+                channelsArray.push(channel)
+                this.setState({channels: channelsArray})
+            });
+            console.log(this.state.channels)
+            // this.setState({channels: channelsArray});
+            // console.log(this.state.channels)
         })
     }
 
@@ -38,16 +47,16 @@ class ChannelPage extends React.Component {
             "messages": [],
             "userID": userID
         }
-        axios({
-            method: 'post',
-            url: '/api/channel',
-            data: channel
-        }).then((data) => {
-            let channelsArray = this.state.channels;
-            channelsArray.push(data)
-            // console.log(data)
-            this.setState({channels: channelsArray})
-        })
+        // axios({
+        //     method: 'post',
+        //     url: '/api/channel',
+        //     data: channel
+        // }).then((data) => {
+        //     let channelsArray = this.state.channels;
+        //     channelsArray.push(data)
+        //     // console.log(data)
+        //     this.setState({channels: channelsArray})
+        // })
     }
 
     render() {
@@ -73,7 +82,7 @@ class ChannelPage extends React.Component {
 
                             {this.state.channels.map(channel => (
                                 
-                                <p key={channel.data.ChannelName}>{channel.data.channelName}</p>
+                                <p key={channel._id}>{channel.channelName}</p>
                             ))}
                         </div>
                         <div className="content">
