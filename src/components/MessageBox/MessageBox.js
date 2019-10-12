@@ -1,7 +1,7 @@
 import React from 'react'
 import './MessageBox.css'
 
-function MessageBox() {
+function MessageBox(props) {
 return (
 
 <div id="message-box" className="fixed-bottom">

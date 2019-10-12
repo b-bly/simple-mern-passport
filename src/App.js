@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { Route, Link } from 'react-router-dom'
 import './components/ChannelPage/ChannelPage.css'
+import { Redirect } from 'react-router-dom'
 // components
 import Signup from './components/SignUp/sign-up'
 import LoginForm from './components/LoginForm/login-form'
@@ -15,7 +16,8 @@ class App extends Component {
     super()
     this.state = {
       loggedIn: false,
-      username: null
+      username: null,
+      userID: null
     }
 
     this.getUser = this.getUser.bind(this)
@@ -31,16 +33,20 @@ class App extends Component {
     this.setState(userObject)
   }
 
+  redirect () {
+    return (<Redirect to="/" />);
+  }
   getUser() {
     axios.get('/user/').then(response => {
       console.log('Get user response: ')
-      console.log(response.data)
+      console.log(response.data.user)
       if (response.data.user) {
         console.log('Get User: There is a user saved in the server session: ')
 
         this.setState({
           loggedIn: true,
-          username: response.data.user.username
+          username: response.data.user.username,
+          userID: response.data.user._id
         })
       } else {
         console.log('Get user: no user');
@@ -64,7 +70,7 @@ class App extends Component {
           render={() =>
             <div>
               <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
-              <Home loggedIn={this.state.loggedIn} />
+              <Home redirect={this.redirect} loggedIn={this.state.loggedIn} />
             </div>
           } />
         <Route
@@ -87,7 +93,7 @@ class App extends Component {
             //render channels
             <div>
             <ChannelsNav updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
-            <ChannelPage updateUser={this.updateUser} loggedIn={this.state.loggedIn} user={this.state.username} />
+            <ChannelPage updateUser={this.updateUser} loggedIn={this.state.loggedIn} userID={this.state.userID} user={this.state.username} />
             </div>
           }
         />

@@ -1,87 +1,106 @@
 import React from 'react';
 import Message from '../Message/Message'
 import axios from 'axios'
-import ChannelBox from '../ChannelBox/ChannelBox';
-import MessageBox from '../MessageBox/MessageBox';
-import ChannelsNav from '../ChannelsNav/ChannelsNav'
+import MessageBox from '../MessageBox/MessageBox'
 
 class ChannelPage extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {inputValue: ''};
         this.handleChange = this.handleChange.bind(this);
         this.addChannel = this.addChannel.bind(this);
+    }
 
+    state = { 
+        inputValue: '' , 
+        user: this.props.user, 
+        channels: []
+    };
+
+
+    componentDidMount() {
+        axios({
+            method: 'get',
+            url: '/user',
+        }).then(function (data) {
+            console.log(data)
+        })
     }
-    handleChange (event) {
-        this.setState({inputValue: event.target.value})
+
+    handleChange(event) {
+        this.setState({ inputValue: event.target.value })
     }
-    addChannel () {
+
+    addChannel() {
+        console.log(this.props.userID)
+        let userID = this.props.userID
         let channel = {
-            "ChannelName": this.state.inputValue,
-            "Messages": [],
-            "Users": [this.props.user]
+            "channelName": this.state.inputValue,
+            "messages": [],
+            "userID": userID
         }
         axios({
             method: 'post',
             url: '/api/channel',
             data: channel
-        }).then(function(response) {
-            console.log(response)
+        }).then((data) => {
+            let channelsArray = this.state.channels;
+            channelsArray.push(data)
+            // console.log(data)
+            this.setState({channels: channelsArray})
         })
     }
-    
-    render () {
+
+    render() {
         {
-            if(this.props.loggedIn) {
-            return (
-                <div>
+            if (this.props.loggedIn) {
+                return (
+                    <div>
 
-                    <div className="sidenav">
-                        <h4>Add a channel</h4>
-    
-                        <input 
-                        value={this.state.inputValue}
-                        type="text" 
-                        placeholder="enter channel here" 
-                        onChange={this.handleChange}>
-                        </input>
-    
-                        <button 
-                        className='btn btn-secondary' 
-                        onClick={this.addChannel}>+
+                        <div className="sidenav">
+                            <h4>Add a channel</h4>
+
+                            <input
+                                value={this.state.inputValue}
+                                type="text"
+                                placeholder="enter channel here"
+                                onChange={this.handleChange}>
+                            </input>
+
+                            <button
+                                className='btn btn-secondary'
+                                onClick={this.addChannel}>+
                         </button>
-    
-                        <p>Channel One</p>
-                        <p>Channel Two</p>
-                        <p>Channel Three</p>
-                        <p>Channel Four</p>
-                    </div>
-                    <div className="content">
-                        <Message />
-                        <Message />
-                        <Message />
-                        <Message />
-                        <Message />
-                        <Message />
-                        <Message />
-                        <Message />
-                        <Message />
 
+                            {this.state.channels.map(channel => (
+                                
+                                <p key={channel.data.ChannelName}>{channel.data.channelName}</p>
+                            ))}
+                        </div>
+                        <div className="content">
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+
+                        </div>
+                        <div className="footer">
+                            <MessageBox />
+                        </div>
                     </div>
-                    <div className="footer">
-                        <MessageBox />
-                    </div>
-                </div>
-            )
+                )
+            }
+            else {
+                return (
+                    <h1>Please <a href="/login">log in</a> in or <a href="/signup">sign up</a> first</h1>
+                )
+            }
         }
-        else {
-            return (
-                <h1>Please <a href="/login">log in</a> in or <a href="/signup">sign up</a> first</h1>
-            )
-        }
-    }
-        
+
     }
 }
 export default ChannelPage;

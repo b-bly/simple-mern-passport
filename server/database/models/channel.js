@@ -5,9 +5,19 @@ mongoose.promise = Promise
 // Define userSchema
 const channelSchema = new Schema({
 
-    ChannelName: String,
-    users: [],
-    messages: []
+    channelName: String,
+    users: [
+        {
+			type: Schema.Types.ObjectId,
+			ref: "user"
+		}
+    ],
+    messages: [
+        {
+			type: Schema.Types.ObjectId,
+			ref: "Message"
+		}
+    ]
     
 })
 
