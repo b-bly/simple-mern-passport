@@ -5,15 +5,18 @@ import { Redirect } from 'react-router-dom'
 class Signup extends Component {
 	constructor() {
 		super()
-		this.state = {
-			username: '',
-			password: '',
-			confirmPassword: '',
-			redirectTo: null
-		}
+		
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
 	}
+
+	state = {
+		username: '',
+		password: '',
+		confirmPassword: '',
+		redirectTo: null
+	}
+
 	handleChange(event) {
 		this.setState({
 			[event.target.name]: event.target.value

@@ -1,22 +1,21 @@
-import React, { Component } from 'react'
-import Navbar from '../Navbar/navbar'
+import React from 'react'
+import { Link } from "react-router-dom"
 function Home(props) {
 
     if (props.loggedIn) {
        return (
            <div>
-               <h1>Go to <a href="/channels">Channels</a></h1>
+               <h1>Go to <Link to="/channels">Channels</Link></h1>
            </div>
        )
     }
     else {
         return (
             <div>
-                <h1>To get started, <a href="/login">log in</a> or <a href="/signup">sign up</a></h1>
+                <h1>To get started, <Link to="/login">log in</Link> or <Link to="/signup">sign up</Link></h1>
             </div>
         )
     }
-
 
 }
 

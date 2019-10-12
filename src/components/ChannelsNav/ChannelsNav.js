@@ -37,7 +37,7 @@ class Navbar extends Component {
         if (!loggedIn) {
             return (<Redirect to="/" />);
         }
-        //Note to self: log out function being called on the logout button is causing it to not redirect, ask sam about this tomorrow
+        
         return (
             <div>
                 <header className="channels-navbar App-header" id="nav-container">

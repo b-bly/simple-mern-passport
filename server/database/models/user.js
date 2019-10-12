@@ -7,7 +7,13 @@ mongoose.promise = Promise
 const userSchema = new Schema({
 
 	username: { type: String, unique: false, required: false },
-	password: { type: String, unique: false, required: false }
+	password: { type: String, unique: false, required: false },
+	channels: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: "Channel"
+		}
+	]
 
 })
 
@@ -28,7 +34,7 @@ userSchema.pre('save', function (next) {
 		next()
 	} else {
 		console.log('models/user.js hashPassword in pre save');
-		
+
 		this.password = this.hashPassword(this.password)
 		next()
 	}

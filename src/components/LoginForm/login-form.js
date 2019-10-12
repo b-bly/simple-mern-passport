@@ -5,14 +5,15 @@ import axios from 'axios'
 class LoginForm extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            username: '',
-            password: '',
-            redirectTo: null
-        }
+       
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
   
+    }
+
+    state = {
+        username: '',
+        password: ''
     }
 
     handleChange(event) {
@@ -32,16 +33,13 @@ class LoginForm extends Component {
             })
             .then(response => {
                 console.log('login response: ')
-                console.log(response)
+                console.log(response.data)
                 if (response.status === 200) {
                     // update App.js state
                     this.props.updateUser({
                         loggedIn: true,
-                        username: response.data.username
-                    })
-                    // update the state to redirect to /channels
-                    this.setState({
-                        redirectTo: '/channels'
+                        username: response.data.username,
+                        userID: response.data.userID
                     })
                 }
             }).catch(error => {
