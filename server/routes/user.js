@@ -55,7 +55,7 @@ router.get('/', (req, res, next) => {
     console.log('===== user!!======')
     console.log(req.user)
     if (req.user) {
-        res.json(response)
+        res.json({response: response, user: req.user})
     } else {
         res.json({ user: null })
     }
