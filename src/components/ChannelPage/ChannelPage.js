@@ -38,12 +38,12 @@ class ChannelPage extends React.Component {
                 <div>
 
                     <div className="sidenav">
-                        <h4>Add a channel</h4>
+                        <h4 id="sidenav-header">Add a channel</h4>
     
                         <input 
                         value={this.state.inputValue}
                         type="text" 
-                        placeholder="enter channel here" 
+                        placeholder="Enter channel here" 
                         onChange={this.handleChange}>
                         </input>
     

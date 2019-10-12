@@ -10,6 +10,9 @@
     overflow: auto;
 } */
 
+@import url('https://fonts.googleapis.com/css?family=Coming+Soon|Itim|Kaushan+Script|Neucha|Pangolin|Rancho|Turret+Road&display=swap');
+
+
 .footer {
     position: fixed;
     left: 0;
@@ -29,6 +32,11 @@
     overflow-x: hidden;
     color: white;
     padding-top: 100px;
+  }
+
+  #sidenav-header {
+    font-family: 'Rancho', cursive;
+    font-size: 2.2rem;
   }
   ​
   .sidenav p {

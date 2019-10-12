@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Coming+Soon|Itim|Kaushan+Script|Neucha|Pangolin|Rancho|Turret+Road&display=swap');
+
+
 .App {
   text-align: center;
 }
@@ -15,7 +18,9 @@
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 7em;
+  font-family: 'Rancho', cursive;
+
 }
 
 .App-intro {
