@@ -10,14 +10,13 @@ class ChannelPage extends React.Component {
         this.addChannel = this.addChannel.bind(this);
     }
 
-    state = { 
-        inputValue: '' , 
-        user: this.props.user, 
+    state = {
+        inputValue: '',
+        user: this.props.user,
         channels: []
     };
 
-
-    componentDidMount() {
+    getChannels() {
         axios({
             method: 'get',
             url: '/user/',
@@ -27,12 +26,16 @@ class ChannelPage extends React.Component {
             //console.log(data.data[0]);
             data.data.response[0].channels.map((channel) => {
                 channelsArray.push(channel)
-                this.setState({channels: channelsArray})
+                this.setState({ channels: channelsArray })
             });
             console.log(this.state.channels)
             // this.setState({channels: channelsArray});
             // console.log(this.state.channels)
         })
+    }
+
+    componentDidMount() {
+        this.getChannels()
     }
 
     handleChange(event) {
@@ -47,16 +50,17 @@ class ChannelPage extends React.Component {
             "messages": [],
             "userID": userID
         }
-        // axios({
-        //     method: 'post',
-        //     url: '/api/channel',
-        //     data: channel
-        // }).then((data) => {
-        //     let channelsArray = this.state.channels;
-        //     channelsArray.push(data)
-        //     // console.log(data)
-        //     this.setState({channels: channelsArray})
-        // })
+        axios({
+            method: 'post',
+            url: '/api/channel',
+            data: channel
+        }).then((data) => {
+            let channelsArray = this.state.channels;
+            channelsArray.push(data)
+            // console.log(data)
+            this.setState({ channels: channelsArray });
+            this.getChannels();
+        })
     }
 
     render() {
@@ -78,22 +82,15 @@ class ChannelPage extends React.Component {
                             <button
                                 className='btn btn-secondary'
                                 onClick={this.addChannel}>+
-                        </button>
-
+                            </button>
+                        <ul id="sidenav-ul">
                             {this.state.channels.map(channel => (
-                                
-                                <p key={channel._id}>{channel.channelName}</p>
+                                <li key={channel._id}>{channel.channelName}</li>
                             ))}
+                        </ul>
+                            
                         </div>
                         <div className="content">
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
                             <Message />
 
                         </div>
