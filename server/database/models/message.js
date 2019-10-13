@@ -5,10 +5,9 @@ mongoose.promise = Promise
 // Define userSchema
 const messageSchema = new Schema({
 
-    ChannelName: String,
-    ChannelID: {type: String, required: true},
-    Sender: {type: String, required: true},
-    MessageText: String
+    channelName: String,
+    sender: { type: Schema.Types.ObjectId, ref: "user" },
+    channelID: { type: Schema.Types.ObjectId, ref: "channel" }
 
 })
 
