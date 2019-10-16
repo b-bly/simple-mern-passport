@@ -2,7 +2,7 @@ import React from 'react';
 import Message from '../Message/Message'
 import axios from 'axios'
 import MessageBox from '../MessageBox/MessageBox'
-
+import MessageTop from '../Message/MessageTop'
 class ChannelPage extends React.Component {
     constructor(props) {
         super(props)
@@ -15,7 +15,8 @@ class ChannelPage extends React.Component {
         user: this.props.user,
         channels: [],
         selectedChannelID: '',
-        selectedChannelName: ''
+        selectedChannelName: '',
+        messages: []
     };
 
     getChannels() {
@@ -31,7 +32,7 @@ class ChannelPage extends React.Component {
                 data.data.channels.forEach(channel => {
                     channelsArray.push(channel)
                 });
-                this.setState({channels: channelsArray});
+                this.setState({ channels: channelsArray });
                 console.log(this.state.channels)
             }
         })
@@ -47,7 +48,7 @@ class ChannelPage extends React.Component {
         this.setState({ inputValue: event.target.value })
     }
 
-    
+
 
     addChannel() {
         console.log(this.props.userID)
@@ -71,17 +72,17 @@ class ChannelPage extends React.Component {
     }
 
     enterChannel = (channelID, channelName) => {
-        this.setState({selectedChannelID: channelID, selectedChannelName: channelName})
+        this.setState({ selectedChannelID: channelID, selectedChannelName: channelName })
         console.log(channelID)
         console.log(this.state.selectedChannelID)
-        axios.get('/api/messages/' + channelID).then(function(response) {
-            console.log(response)
+        axios.get('/api/messages/' + channelID).then((response) => {
+            //console.log(response)
+            this.setState({ messages: response.data })
+            console.log(this.state.messages)
         })
     }
 
     getMessages = message => {
-
-        
 
     }
 
@@ -107,22 +108,26 @@ class ChannelPage extends React.Component {
 
                         <ul id="sidenav-ul">
                             {this.state.channels.map(channel => (
-                                <li 
-                                onClick={() => this.enterChannel(channel._id, channel.channelName)}
-                                key={channel._id}>{channel.channelName}</li>
+                                <li
+                                    onClick={() => this.enterChannel(channel._id, channel.channelName)}
+                                    key={channel._id}>{channel.channelName}</li>
                             ))}
                         </ul>
 
                     </div>
                     <div className="content">
-                        <Message />
-
+                        {this.state.messages.map(message => (
+                            <div>
+                            <MessageTop />
+                            <Message text={message.messageBody} />
+                            </div>
+                        ))}
                     </div>
                     <div className="footer">
-                        <MessageBox 
-                        userID={this.props.userID} 
-                        selectedChannelID={this.state.selectedChannelID}
-                        selectedChannelName={this.state.selectedChannelName} />
+                        <MessageBox
+                            userID={this.props.userID}
+                            selectedChannelID={this.state.selectedChannelID}
+                            selectedChannelName={this.state.selectedChannelName} />
                     </div>
                 </div>
             )
