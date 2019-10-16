@@ -28,8 +28,9 @@ class MessageBox extends React.Component {
       method: 'post',
       url: '/api/messages/' + this.state.selectedChannelID,
       data: message
-    }).then(function (response) {
+    }).then((response) => {
       console.log(response)
+      this.props.setChannelState(response.data)
     })
   }
 

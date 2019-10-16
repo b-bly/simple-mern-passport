@@ -12,13 +12,12 @@ class ChannelPage extends React.Component {
 
     state = {
         inputValue: '',
-        user: this.props.user,
         channels: [],
         selectedChannelID: '',
         selectedChannelName: '',
         messages: []
     };
-
+    
     getChannels() {
         axios({
             method: 'get',
@@ -47,8 +46,6 @@ class ChannelPage extends React.Component {
     channelHandleChange(event) {
         this.setState({ inputValue: event.target.value })
     }
-
-
 
     addChannel() {
         console.log(this.props.userID)
@@ -82,12 +79,16 @@ class ChannelPage extends React.Component {
         })
     }
 
-    getMessages = message => {
+    setChannelState = (message) => {
+
+        this.state.messages.push(message)
+        this.setState({ messages: this.state.messages })
+        console.log(this.state.messages)
 
     }
 
     render() {
-        {
+        
             return (
                 <div>
 
@@ -119,7 +120,7 @@ class ChannelPage extends React.Component {
                         {this.state.messages.map(message => (
                             <div>
                             <MessageTop />
-                            <Message text={message.messageBody} />
+                            <Message sender={this.props.user} text={message.messageBody} />
                             </div>
                         ))}
                     </div>
@@ -127,11 +128,12 @@ class ChannelPage extends React.Component {
                         <MessageBox
                             userID={this.props.userID}
                             selectedChannelID={this.state.selectedChannelID}
-                            selectedChannelName={this.state.selectedChannelName} />
+                            selectedChannelName={this.state.selectedChannelName}
+                            setChannelState={this.setChannelState} />
                     </div>
                 </div>
             )
-        }
+        
 
     }
 }

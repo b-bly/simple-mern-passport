@@ -21,7 +21,7 @@ function Message(props) {
         <div id="message-div" style={messageStyle}>
 
             <img style={imgSize} src={avatar} alt="avatar" />
-            <p>{props.text}</p>
+            <p>{`${props.sender}: ${props.text}`}</p>
 
         </div>
 
