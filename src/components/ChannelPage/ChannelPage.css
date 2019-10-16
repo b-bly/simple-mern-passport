@@ -25,10 +25,13 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: black;
+    background-image: url('../../images/space2.JPG');
+    background-repeat: no-repeat;
+    background-size: cover;
     overflow-x: hidden;
     color: white;
     padding-top: 100px;
+    border: 1px solid white;
   }
   ​
   .sidenav p {

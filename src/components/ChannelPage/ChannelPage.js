@@ -1,7 +1,9 @@
 import React from 'react';
 import Message from '../Message/Message'
+import MessageTop from '../Message/MessageTop'
 import axios from 'axios'
 import MessageBox from '../MessageBox/MessageBox'
+
 
 class ChannelPage extends React.Component {
     constructor(props) {
@@ -68,7 +70,7 @@ class ChannelPage extends React.Component {
                         <div className="sidenav">
                             <h4>Add a channel</h4>
 
-                            <input
+                            <input style={{padding: 8, borderRadius: 5}}
                                 value={this.state.inputValue}
                                 type="text"
                                 placeholder="enter channel here"
@@ -76,8 +78,8 @@ class ChannelPage extends React.Component {
                             </input>
 
                             <button
-                                className='btn btn-secondary'
-                                onClick={this.addChannel}>+
+                                className='w3-button w3-btn w3-blue w3-round w3-padding'
+                                onClick={this.addChannel}>ADD +
                         </button>
 
                             {this.state.channels.map(channel => (
@@ -86,7 +88,7 @@ class ChannelPage extends React.Component {
                             ))}
                         </div>
                         <div className="content">
-                            <Message />
+                            <MessageTop />
                             <Message />
                             <Message />
                             <Message />
