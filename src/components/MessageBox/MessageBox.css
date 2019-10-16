@@ -1,4 +1,7 @@
 #message-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 75%;
     margin-left: 25%;
     z-index: 1;
@@ -12,7 +15,8 @@
 }
 
 #input-and-button {
-    width: 95%
+    width: 95%;
+    margin-top: 1rem;
 }
 
 #message-input {

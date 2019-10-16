@@ -34,10 +34,11 @@ class Signup extends Component {
 		})
 			.then(response => {
 				console.log(response)
-				if (!response.data.errmsg) {
+				if (response.status === 200) {
 					console.log('successful signup')
+					console.log(response)
 					this.setState({ //redirect to channels page
-						redirectTo: '/channels'
+						redirectTo: '/login'
 					})
 
 				} else {

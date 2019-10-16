@@ -19,16 +19,19 @@ router.post('/channel', (req, res) => {
         console.log("updatedUser channels:")
         console.log(updatedUser.channels)
         res.send("success")
+        res.json(updatedUser)
     })
     
 })
 
 router.get('/channel', (req, res) => {
-    
     console.log('req.body: ')
     console.log(req.body)
     res.send(req.body)
-
 })
 
+router.get('/channel/:id', (req, res) => {
+    console.log(req.body)
+    res.send(req.body)
+})
 module.exports = router
