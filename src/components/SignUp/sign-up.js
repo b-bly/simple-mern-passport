@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
-import './components/Signup/sign-up'
+// import { url } from 'inspector'
+import './signup.css'
 class Signup extends Component {
 	constructor() {
 		super()
@@ -53,7 +54,10 @@ class Signup extends Component {
 			return <Redirect to={{ pathname: this.state.redirectTo }} />
 		} else {
 			return (
-				<div className="SignupForm">
+				<div className="SignupForm sf">
+					<br></br>
+					<br></br>
+					<br></br>
 					<h4>Sign up</h4>
 					<form className="form-horizontal">
 						<div className="form-group">
@@ -94,6 +98,11 @@ class Signup extends Component {
 							>Sign up</button>
 						</div>
 					</form>
+					
+					<div>
+                        <img src="https://media.giphy.com/media/BrT2h4G7ldP6U/giphy.gif" style={{marginTop:50}} alt="Sign" width="300" height="225"></img>
+                    </div>
+
 				</div>
 
 			)

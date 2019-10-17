@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './login.css'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 
@@ -56,7 +57,10 @@ class LoginForm extends Component {
             return <Redirect to={'/channels'} />
         } else {
             return (
-                <div>
+                <div className="Lf">
+                    <br></br>
+					<br></br>
+					<br></br>
                     <h4>Login</h4>
                     <form className="form-horizontal">
                         <div className="form-group">
@@ -97,6 +101,10 @@ class LoginForm extends Component {
                                 type="submit">Login</button>
                         </div>
                     </form>
+                    
+                    <div>
+                        <img src="https://media.giphy.com/media/BrT2h4G7ldP6U/giphy.gif" style={{marginTop:50}} alt="Sign" width="300" height="225"></img>
+                    </div>
                 </div>
             )
         }

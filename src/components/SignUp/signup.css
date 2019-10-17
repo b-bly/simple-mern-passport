@@ -1,0 +1,8 @@
+html, .sf{
+    background-image: url("../../images/background.PNG");
+    background-size: cover;
+}
+
+.sf{
+    color: antiquewhite;
+}
