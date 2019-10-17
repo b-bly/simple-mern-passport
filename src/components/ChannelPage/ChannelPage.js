@@ -117,11 +117,9 @@ class ChannelPage extends React.Component {
 
                     </div>
                     <div className="content">
+                    <MessageTop />
                         {this.state.messages.map(message => (
-                            <div>
-                            <MessageTop />
-                            <Message sender={this.props.user} text={message.messageBody} />
-                            </div>
+                            <Message keyID={message._id} sender={this.props.user} text={message.messageBody} />
                         ))}
                     </div>
                     <div className="footer">

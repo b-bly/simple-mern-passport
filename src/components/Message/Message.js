@@ -18,10 +18,9 @@ const imgSize = {
 
 function Message(props) {
     return (
-        <div id="message-div" style={messageStyle}>
+        <div key={props.keyID} id="message-div" style={messageStyle}>
 
-            <img style={imgSize} src={avatar} alt="avatar" />
-            <p>{`${props.sender}: ${props.text}`}</p>
+            <p key={props.keyID}><img key={props.keyID} style={imgSize} src={avatar} alt="avatar" />{`${props.sender}: ${props.text}`}</p>
 
         </div>
 
