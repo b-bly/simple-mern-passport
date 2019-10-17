@@ -17,8 +17,6 @@
 }
 
 .App-title {
-  margin-top: 50px;
-  font-size: 7em;
   font-family: 'Rancho', cursive;
 }
 
@@ -43,3 +41,19 @@
   to { transform: rotate(360deg); }
 }
 
+.title {
+  margin-left: 43%;
+  margin-right: 57%;
+  font-size: 72px;
+  }
+
+  .sizeNav {
+    background-image: url('./images/space.JPG');
+  }
+  
+  @media (max-width: 600px){
+  .title {
+  margin-left:0px;
+  }
+  
+  } 

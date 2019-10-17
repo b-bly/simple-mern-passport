@@ -54,12 +54,12 @@ class LoginForm extends Component {
             return <Redirect to={'/channels'} />
         } else {
             return (
-                <div>
+                <div className="mt-5">
                     <h4>Login</h4>
                     <form className="form-horizontal">
                         <div className="form-group">
                             <div className="col-1 col-ml-auto">
-                                <label className="form-label" htmlFor="username">Username</label>
+                                <label className="form-label" htmlFor="username">Username: </label>
                             </div>
                             <div className="col-3 col-mr-auto">
                                 <input className="form-input"
