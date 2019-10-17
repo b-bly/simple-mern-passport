@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Route, Link } from 'react-router-dom'
+import './components/ChannelPage/ChannelPage.css'
 // components
-import Signup from './components/sign-up'
-import LoginForm from './components/login-form'
-import Navbar from './components/navbar'
-import Home from './components/home'
+import Signup from './components/SignUp/sign-up'
+import LoginForm from './components/LoginForm/login-form'
+import Navbar from './components/Navbar/navbar'
+import Home from './components/Home/home'
+import ChannelPage from './components/ChannelPage/ChannelPage'
+import ChannelsNav from './components/ChannelsNav/ChannelsNav'
 
 class App extends Component {
   constructor() {
@@ -24,7 +27,7 @@ class App extends Component {
     this.getUser()
   }
 
-  updateUser (userObject) {
+  updateUser(userObject) {
     this.setState(userObject)
   }
 
@@ -52,29 +55,42 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-   
-        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+
+        {/* <Navbar username={this.state.username} updateUser={this.updateUser} loggedIn={this.state.loggedIn} /> */}
         {/* greet user if logged in: */}
-        {this.state.loggedIn &&
-          <p>Join the party, {this.state.username}!</p>
-        }
         {/* Routes to different components */}
         <Route
           exact path="/"
-          component={Home} />
+          render={() =>
+            <div>
+              <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+              <Home loggedIn={this.state.loggedIn} />
+            </div>
+          } />
         <Route
           path="/login"
           render={() =>
             <LoginForm
               updateUser={this.updateUser}
+              loggedIn={this.state.loggedIn}
             />}
         />
         <Route
           path="/signup"
           render={() =>
-            <Signup/>}
+            <Signup />}
         />
-
+        {/* route for channels */}
+        <Route
+          path="/channels"
+          render={() =>
+            //render channels
+            <div>
+            <ChannelsNav updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+            <ChannelPage updateUser={this.updateUser} loggedIn={this.state.loggedIn} user={this.state.username} />
+            </div>
+          }
+        />
       </div>
     );
   }
