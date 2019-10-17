@@ -16,18 +16,22 @@ router.post('/channel', (req, res) => {
         console.log(updatedChannel)
         return User.findOneAndUpdate({_id: req.body.userID}, {$push: {channels: updatedChannel._id}}, {new: true})
     }).then((updatedUser) => {
-        console.log("updatedUser")
-        console.log(updatedUser)
+        console.log("updatedUser channels:")
+        console.log(updatedUser.channels)
         res.send("success")
+        res.json(updatedUser)
     })
     
 })
 
 router.get('/channel', (req, res) => {
-    
     console.log('req.body: ')
     console.log(req.body)
     res.send(req.body)
 })
 
+router.get('/channel/:id', (req, res) => {
+    console.log(req.body)
+    res.send(req.body)
+})
 module.exports = router

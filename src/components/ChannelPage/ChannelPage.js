@@ -2,40 +2,48 @@ import React from 'react';
 import Message from '../Message/Message'
 import axios from 'axios'
 import MessageBox from '../MessageBox/MessageBox'
-
+import MessageTop from '../Message/MessageTop'
 class ChannelPage extends React.Component {
     constructor(props) {
         super(props)
-        this.handleChange = this.handleChange.bind(this);
+        this.channelHandleChange = this.channelHandleChange.bind(this);
         this.addChannel = this.addChannel.bind(this);
     }
 
-    state = { 
-        inputValue: '' , 
-        user: this.props.user, 
-        channels: []
+    state = {
+        inputValue: '',
+        channels: [],
+        selectedChannelID: '',
+        selectedChannelName: '',
+        messages: []
     };
-
-
-    componentDidMount() {
+    
+    getChannels() {
         axios({
             method: 'get',
-            url: '/user/',
+            url: '/user/' + this.props.userID,
         }).then((data) => {
             console.log(data)
-            let channelsArray = [];
-            //console.log(data.data[0]);
-            data.data.response[0].channels.map((channel) => {
-                channelsArray.push(channel)
-                this.setState({channels: channelsArray})
-            });
-            console.log(this.state.channels)
-            // this.setState({channels: channelsArray});
-            // console.log(this.state.channels)
+            if (data) {
+                console.log(data)
+                let channelsArray = [];
+                //console.log(data.data[0]);
+                data.data.channels.forEach(channel => {
+                    channelsArray.push(channel)
+                });
+                this.setState({ channels: channelsArray });
+                console.log(this.state.channels)
+            }
         })
     }
 
-    handleChange(event) {
+    componentDidMount() {
+        if (this.props.loggedIn) {
+            this.getChannels()
+        }
+    }
+
+    channelHandleChange(event) {
         this.setState({ inputValue: event.target.value })
     }
 
@@ -47,68 +55,83 @@ class ChannelPage extends React.Component {
             "messages": [],
             "userID": userID
         }
-        // axios({
-        //     method: 'post',
-        //     url: '/api/channel',
-        //     data: channel
-        // }).then((data) => {
-        //     let channelsArray = this.state.channels;
-        //     channelsArray.push(data)
-        //     // console.log(data)
-        //     this.setState({channels: channelsArray})
-        // })
+        axios({
+            method: 'post',
+            url: '/api/channel',
+            data: channel
+        }).then((data) => {
+            let channelsArray = this.state.channels;
+            channelsArray.push(data)
+            // console.log(data)
+            this.setState({ channels: channelsArray, inputValue: '' });
+            this.getChannels();
+        })
+    }
+
+    enterChannel = (channelID, channelName) => {
+        this.setState({ selectedChannelID: channelID, selectedChannelName: channelName })
+        console.log(channelID)
+        console.log(this.state.selectedChannelID)
+        axios.get('/api/messages/' + channelID).then((response) => {
+            //console.log(response)
+            this.setState({ messages: response.data })
+            console.log(this.state.messages)
+        })
+    }
+
+    setChannelState = (message) => {
+
+        this.state.messages.push(message)
+        this.setState({ messages: this.state.messages })
+        console.log(this.state.messages)
+
     }
 
     render() {
-        {
-            if (this.props.loggedIn) {
-                return (
-                    <div>
+        
+            return (
+                <div>
 
-                        <div className="sidenav">
-                            <h4>Add a channel</h4>
+                    <div className="sidenav">
+                        <h4>Add a channel</h4>
 
-                            <input
-                                value={this.state.inputValue}
-                                type="text"
-                                placeholder="enter channel here"
-                                onChange={this.handleChange}>
-                            </input>
+                        <input
+                            value={this.state.inputValue}
+                            type="text"
+                            placeholder="enter channel here"
+                            onChange={this.channelHandleChange}>
+                        </input>
 
-                            <button
-                                className='btn btn-secondary'
-                                onClick={this.addChannel}>+
-                        </button>
+                        <button
+                            className='btn btn-secondary'
+                            onClick={this.addChannel}>+
+                            </button>
 
+                        <ul id="sidenav-ul">
                             {this.state.channels.map(channel => (
-                                
-                                <p key={channel._id}>{channel.channelName}</p>
+                                <li
+                                    onClick={() => this.enterChannel(channel._id, channel.channelName)}
+                                    key={channel._id}>{channel.channelName}</li>
                             ))}
-                        </div>
-                        <div className="content">
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
+                        </ul>
 
-                        </div>
-                        <div className="footer">
-                            <MessageBox />
-                        </div>
                     </div>
-                )
-            }
-            else {
-                return (
-                    <h1>Please <a href="/login">log in</a> in or <a href="/signup">sign up</a> first</h1>
-                )
-            }
-        }
+                    <div className="content">
+                    <MessageTop />
+                        {this.state.messages.map(message => (
+                            <Message keyID={message._id} sender={this.props.user} text={message.messageBody} />
+                        ))}
+                    </div>
+                    <div className="footer">
+                        <MessageBox
+                            userID={this.props.userID}
+                            selectedChannelID={this.state.selectedChannelID}
+                            selectedChannelName={this.state.selectedChannelName}
+                            setChannelState={this.setChannelState} />
+                    </div>
+                </div>
+            )
+        
 
     }
 }

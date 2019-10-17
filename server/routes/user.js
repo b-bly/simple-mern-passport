@@ -61,7 +61,11 @@ router.get('/', (req, res, next) => {
     }
 })
 })
-
+router.get('/:userID', (req, res) => {
+    User.findById(req.params.userID).populate('channels').then(function(response) {
+        res.send(response)
+    })
+})
 router.post('/logout', (req, res) => {
     if (req.user) {
         req.logout()
