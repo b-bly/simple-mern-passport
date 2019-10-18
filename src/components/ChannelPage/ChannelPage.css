@@ -43,21 +43,8 @@
     padding: 80px 20px;
   }
 
-  #sidenav-ul li {
-    list-style: none;
-    font-size: 18px;
-    text-transform: uppercase;
-    background-color: black;
-    border-radius: 5px;
-    padding: 10px 0;
-    opacity: .7;
-  }
-
-  #sidenav-ul li:hover {
-    cursor: pointer;
-    opacity: .7;
-    background-color: #f8f4f4;
-    color: black;
+  #sidenav-ul {
+    margin: 0 auto;
   }
 
   .inp {
@@ -71,4 +58,41 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     cursor: pointer;
+  }
+  .channel-delete {
+    border: none;
+    background: none;
+    float: right;
+    color: black;
+  }
+
+  .channel-delete:hover {
+    cursor: pointer;
+    color: red;
+  }
+
+  .channel-group  {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    list-style: none;
+    font-size: 18px;
+    text-transform: uppercase;
+    background-color: black;
+    border-radius: 5px;
+    opacity: .7;
+    width: 80%;
+    margin: 10px auto;
+  }
+  .channel-group:hover {
+    display: flex;
+    cursor: pointer;
+    opacity: .7;
+    background-color: #f8f4f4;
+    color: black;
+    
+  }
+  .channel-group li {
+    width: 70%;
+    margin-bottom: 0.4rem;
   }
