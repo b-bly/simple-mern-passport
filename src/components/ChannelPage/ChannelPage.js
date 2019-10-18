@@ -74,8 +74,14 @@ class ChannelPage extends React.Component {
         console.log(channelID)
         console.log(this.state.selectedChannelID)
         axios.get('/api/messages/' + channelID).then((response) => {
-            //console.log(response)
-            this.setState({ messages: response.data })
+            console.log(response.data)
+            if (response.data.length === 0) {
+                this.setState({ messages: [{ messageBody: 'Looks like there are no messages here yet...' }] })
+                console.log(this.state.messages)
+            }
+            else {
+                this.setState({ messages: response.data })
+            }
             console.log(this.state.messages)
         })
     }
@@ -83,7 +89,7 @@ class ChannelPage extends React.Component {
     deleteChannel = () => {
 
     }
-    
+
     setChannelState = (message) => {
 
         this.state.messages.push(message)
