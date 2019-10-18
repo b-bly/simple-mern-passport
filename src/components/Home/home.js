@@ -11,8 +11,8 @@ function Home(props) {
     }
     else {
         return (
-            <div>
-                <h1>To get started, <Link to="/login">log in</Link> or <Link to="/signup">sign up</Link></h1>
+            <div className="mt-5 ">
+                <h3>To get started, <Link to="/login"><span className="w3-border p-2 w3-round w3-hover-border-blue w3-hover-grayscale">log in</span></Link> or <Link to="/signup"><span className="w3-border p-2 w3-round w3-hover-border-blue w3-hover-grayscale">sign up</span></Link></h3>
             </div>
         )
     }

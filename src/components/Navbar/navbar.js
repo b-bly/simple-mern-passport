@@ -34,33 +34,31 @@ class Navbar extends Component {
         return (
             <div>
 
-                <header className="navbar App-header" id="nav-container">
-                    <div className="col-4" >
+                <header className="w3-bar w3-black sizeNav">
+                    <div className="">
                         {loggedIn ? (
                             <section className="navbar-section">
                                 <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
                                     <span className="text-secondary">logout</span></Link>
                                     {/* <p>Join the party, {this.props.username}!</p> */}
-                                
 
                             </section>
                         ) : (
-                                <section className="navbar-section">
-                                    <Link to="/" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">home</span>
+                                <section className="">
+                                    <div className="w3-container mt-3">
+                                    <Link to="/" className="w3-bar-item w3-button w3-border w3-round w3-text-white mr-3 w3-mobile">
+                                        home
                                     </Link>
-                                    <Link to="/login" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">login</span>
+                                    <Link to="/login" className="w3-bar-item w3-button w3-border w3-round w3-text-white mr-3 w3-mobile">
+                                        login
                                     </Link>
-                                    <Link to="/signup" className="btn btn-link">
-                                        <span className="text-secondary">sign up</span>
+                                    <Link to="/signup" className="w3-bar-item w3-button w3-border w3-round w3-text-white w3-mobile">
+                                        sign up
                                     </Link>
+                                    <h1 className="w3-bar-item w3-mobile title App-title">ChatSpace</h1>
+                                    </div> 
                                 </section>
                             )}
-                    </div>
-                    <div className="col-4 col-mr-auto">
-                        <div id="top-filler"></div>
-                        <h1 className="App-title">ChatSpace</h1>
                     </div>
                 </header>
             </div>
@@ -71,3 +69,7 @@ class Navbar extends Component {
 }
 
 export default Navbar
+
+
+
+

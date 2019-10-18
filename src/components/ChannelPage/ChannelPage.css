@@ -25,10 +25,13 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: black;
+    background-image: url('../../images/space2.JPG');
+    background-repeat: no-repeat;
+    background-size: cover;
     overflow-x: hidden;
     color: white;
     padding-top: 100px;
+    border: 1px solid white;
   }
   ​
   .sidenav p {
@@ -42,9 +45,30 @@
 
   #sidenav-ul li {
     list-style: none;
+    font-size: 18px;
+    text-transform: uppercase;
+    background-color: black;
+    border-radius: 5px;
+    padding: 10px 0;
+    opacity: .7;
   }
 
   #sidenav-ul li:hover {
     cursor: pointer;
-    text-decoration: underline;
+    opacity: .7;
+    background-color: #f8f4f4;
+    color: black;
+  }
+
+  .inp {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-style: solid;
+    margin-bottom: 30px;
+  }
+
+  .bttn {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
   }

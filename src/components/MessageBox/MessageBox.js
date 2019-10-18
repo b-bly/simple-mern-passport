@@ -42,12 +42,11 @@ class MessageBox extends React.Component {
         <div id="input-and-button" className="input-group mb-3 mx-auto">
           <input onChange={this.messageHandleChange} value={this.state.messageBoxVal} id="message-input" type="text" className="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" />
           <div id="send-div" className="input-group-append">
-            <button onClick={this.sendMessage} id="send" className="btn btn-outline-secondary" type="button">Send</button>
+            <button onClick={this.sendMessage} id="send" className="btn w3-blue" type="button">Send</button>
           </div>
         </div>
 
       </div>
-
     )
   }
 

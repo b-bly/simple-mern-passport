@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
+import './sign-up.css'
+
 
 class Signup extends Component {
 	constructor() {
@@ -57,12 +59,12 @@ class Signup extends Component {
 			return <Redirect to={{ pathname: this.state.redirectTo }} />
 		} else {
 			return (
-				<div className="SignupForm">
+				<div className="SignupForm mt-5">
 					<h4>Sign up</h4>
 					<form className="form-horizontal">
 						<div className="form-group">
 							<div className="col-1 col-ml-auto">
-								<label className="form-label" htmlFor="username">Username</label>
+								<label className="form-label" htmlFor="username">Username: </label>
 							</div>
 							<div className="col-3 col-mr-auto">
 								<input className="form-input"
@@ -98,6 +100,9 @@ class Signup extends Component {
 							>Sign up</button>
 						</div>
 					</form>
+					<div>
+                        <img src="https://media.giphy.com/media/BrT2h4G7ldP6U/giphy.gif" style={{marginTop:50}} alt="Sign" width="300" height="225"></img>
+                    </div>
 				</div>
 
 			)

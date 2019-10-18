@@ -1,8 +1,9 @@
 import React from 'react';
 import Message from '../Message/Message'
+import MessageTop from '../Message/MessageTop'
 import axios from 'axios'
 import MessageBox from '../MessageBox/MessageBox'
-import MessageTop from '../Message/MessageTop'
+
 class ChannelPage extends React.Component {
     constructor(props) {
         super(props)
@@ -95,26 +96,25 @@ class ChannelPage extends React.Component {
                     <div className="sidenav">
                         <h4>Add a channel</h4>
 
-                        <input
-                            value={this.state.inputValue}
-                            type="text"
-                            placeholder="enter channel here"
-                            onChange={this.channelHandleChange}>
-                        </input>
+                            <input className="inp w3-transparent w3-text-white" style={{padding: 8}}
+                                value={this.state.inputValue}
+                                type="text"
+                                placeholder="enter channel here"
+                                onChange={this.channelHandleChange}>
+                            </input>
 
-                        <button
-                            className='btn btn-secondary'
-                            onClick={this.addChannel}>+
-                            </button>
+                            <button
+                                className='w3-blue w3-hover-opacity w3-padding bttn'
+                                onClick={this.addChannel}>ADD +
+                        </button>
 
                         <ul id="sidenav-ul">
                             {this.state.channels.map(channel => (
-                                <li
+                                <li 
                                     onClick={() => this.enterChannel(channel._id, channel.channelName)}
                                     key={channel._id}>{channel.channelName}</li>
                             ))}
                         </ul>
-
                     </div>
                     <div className="content">
                     <MessageTop />
@@ -131,8 +131,6 @@ class ChannelPage extends React.Component {
                     </div>
                 </div>
             )
-        
-
     }
 }
 export default ChannelPage;

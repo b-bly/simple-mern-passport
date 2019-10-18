@@ -12,6 +12,7 @@
     height: 100%;
     border-top-right-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
+    padding: 0 30px;
 }
 
 #input-and-button {

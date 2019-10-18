@@ -44,8 +44,8 @@ class Navbar extends Component {
                     <div className="col-4" >
                         {loggedIn ? (
                             <section className="navbar-section">
-                                <button id="logout-button" onClick={this.logout}>
-                                    <span className="text-secondary">logout</span>
+                                <button id="logout-button" className="w3-text-white w3-padding w3-border w3-round w3-hover-opacity" onClick={this.logout}>
+                                    <span>LOGOUT</span>
                                 </button>
 
                                 {/* <p>Join the party, {this.props.username}!</p> */}
