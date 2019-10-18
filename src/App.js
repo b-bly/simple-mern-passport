@@ -17,7 +17,9 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       username: null,
-      userID: null
+      userID: null,
+      selectedChannelID: '',
+      selectedChannelName: ''
     }
 
     this.getUser = this.getUser.bind(this)
@@ -37,6 +39,10 @@ class App extends Component {
     return (<Redirect to="/" />);
   }
   
+  setAppState = (channelID, channelName) => {
+    this.setState({ selectedChannelID: channelID, selectedChannelName: channelName })
+  }
+
   getUser() {
     axios.get('/user/').then(response => {
       console.log('Get user response: ')
@@ -90,8 +96,8 @@ class App extends Component {
           render={() =>
             //render channels
             <div>
-            <ChannelsNav updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
-            <ChannelPage updateUser={this.updateUser} loggedIn={this.state.loggedIn} userID={this.state.userID} user={this.state.username} />
+            <ChannelsNav selectedChannelID={this.state.selectedChannelID} selectedChannelName={this.state.selectedChannelName} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+            <ChannelPage setAppState={this.setAppState} updateUser={this.updateUser} loggedIn={this.state.loggedIn} userID={this.state.userID} user={this.state.username} />
             </div>
           }
         />

@@ -84,6 +84,7 @@ class ChannelPage extends React.Component {
             }
             console.log(this.state.messages)
         })
+        this.props.setAppState(channelID, channelName)
     }
 
     setChannelState = (message) => {
@@ -96,9 +97,10 @@ class ChannelPage extends React.Component {
 
     deleteChannel = channelID => {
         console.log(channelID)
-        axios.delete('/api/channel/' + channelID).then(function(response) {
-            console.log(response)
-        })
+        axios.delete('/api/channel/' + channelID)
+            .then(function (response) {
+                console.log(response)
+            })
     }
 
     render() {
@@ -108,18 +110,20 @@ class ChannelPage extends React.Component {
 
                 <div className="sidenav">
                     <h4>Add a channel</h4>
+                    <div id="add-channel-div">
+                        <input className="inp w3-transparent w3-text-white" style={{ padding: 8 }}
+                            value={this.state.inputValue}
+                            type="text"
+                            placeholder="enter channel here"
+                            onChange={this.channelHandleChange}>
+                        </input>
 
-                    <input className="inp w3-transparent w3-text-white" style={{ padding: 8 }}
-                        value={this.state.inputValue}
-                        type="text"
-                        placeholder="enter channel here"
-                        onChange={this.channelHandleChange}>
-                    </input>
-
-                    <button
-                        className='w3-blue w3-hover-opacity w3-padding bttn'
-                        onClick={this.addChannel}>ADD +
+                        <button
+                            className='w3-hover-opacity bttn'
+                            onClick={this.addChannel}>+
                         </button>
+                    </div>
+
 
                     <ul id="sidenav-ul">
                         {this.state.channels.map(channel => (

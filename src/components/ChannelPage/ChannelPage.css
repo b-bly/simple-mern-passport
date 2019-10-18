@@ -52,13 +52,26 @@
     border-bottom-left-radius: 5px;
     border-bottom-style: solid;
     margin-bottom: 30px;
+    height: 100%;
+    width: 70%
   }
 
   .bttn {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    border-left: none;
     cursor: pointer;
+    height: 100%;
+    width: 30%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0);
+    color: white;
   }
+  .bttn:active {
+    border-color: red;
+    color: red;
+  }
+
   .channel-delete {
     border: none;
     background: none;
@@ -99,4 +112,12 @@
   .channel-group li {
     width: 70%;
     margin-bottom: 0.4rem;
+  }
+
+  #add-channel-div {
+    width: 80%;
+    height: 40px;
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0 auto;
   }
