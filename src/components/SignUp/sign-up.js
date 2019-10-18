@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
+import './sign-up.css'
+
 
 class Signup extends Component {
 	constructor() {
@@ -34,10 +36,11 @@ class Signup extends Component {
 		})
 			.then(response => {
 				console.log(response)
-				if (!response.data.errmsg) {
+				if (response.status === 200) {
 					console.log('successful signup')
+					console.log(response)
 					this.setState({ //redirect to channels page
-						redirectTo: '/channels'
+						redirectTo: '/login'
 					})
 
 				} else {
@@ -97,6 +100,9 @@ class Signup extends Component {
 							>Sign up</button>
 						</div>
 					</form>
+					<div>
+                        <img src="https://media.giphy.com/media/BrT2h4G7ldP6U/giphy.gif" style={{marginTop:50}} alt="Sign" width="300" height="225"></img>
+                    </div>
 				</div>
 
 			)

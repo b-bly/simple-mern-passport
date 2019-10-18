@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import './components/ChannelPage/ChannelPage.css'
 import { Redirect } from 'react-router-dom'
 // components
@@ -39,7 +39,7 @@ class App extends Component {
   getUser() {
     axios.get('/user/').then(response => {
       console.log('Get user response: ')
-      console.log(response.data[0])
+      console.log(response.data.user)
       if (response.data.user) {
         console.log('Get User: There is a user saved in the server session: ')
 
@@ -62,9 +62,6 @@ class App extends Component {
     return (
       <div className="App">
 
-        {/* <Navbar username={this.state.username} updateUser={this.updateUser} loggedIn={this.state.loggedIn} /> */}
-        {/* greet user if logged in: */}
-        {/* Routes to different components */}
         <Route
           exact path="/"
           render={() =>

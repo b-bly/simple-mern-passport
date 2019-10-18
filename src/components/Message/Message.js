@@ -20,16 +20,13 @@ const imgSize = {
 }
 
 
+function Message(props) {
+    return (
+        <div key={props.keyID} id="message-div" style={messageStyle}>
 
-function Message() {
-return (
-<div id="message-div" style={messageStyle}>
-​
-<img style={imgSize} src={avatar} alt="avatar" />
-<p>Sample Text Messages Goes Here.</p>
-​
-</div>
-        
+            <p key={props.keyID}><img key={props.keyID} style={imgSize} src={avatar} alt="avatar" />{`${props.sender}: ${props.text}`}</p>
+
+        </div>
     )
 }
 

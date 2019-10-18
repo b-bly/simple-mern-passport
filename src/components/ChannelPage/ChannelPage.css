@@ -42,3 +42,33 @@
     margin-left: 25%;
     padding: 80px 20px;
   }
+
+  #sidenav-ul li {
+    list-style: none;
+    font-size: 18px;
+    text-transform: uppercase;
+    background-color: black;
+    border-radius: 5px;
+    padding: 10px 0;
+    opacity: .7;
+  }
+
+  #sidenav-ul li:hover {
+    cursor: pointer;
+    opacity: .7;
+    background-color: #f8f4f4;
+    color: black;
+  }
+
+  .inp {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-style: solid;
+    margin-bottom: 30px;
+  }
+
+  .bttn {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+  }
