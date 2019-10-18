@@ -33,10 +33,6 @@ class App extends Component {
     this.setState(userObject)
   }
 
-  signUpAndLogIn (loggedin, username) {
-    this.setState({loggedIn: loggedin, username: username})
-  }
-
   redirect () {
     return (<Redirect to="/" />);
   }
@@ -86,7 +82,7 @@ class App extends Component {
         <Route
           path="/signup"
           render={() =>
-            <Signup updateUser={this.updateUser} signUpAndLogIn={this.signUpAndLogIn} />}
+            <Signup updateUser={this.updateUser} />}
         />
         {/* route for channels */}
         <Route
