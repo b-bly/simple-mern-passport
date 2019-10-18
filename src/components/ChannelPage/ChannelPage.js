@@ -86,16 +86,19 @@ class ChannelPage extends React.Component {
         })
     }
 
-    deleteChannel = () => {
-
-    }
-
     setChannelState = (message) => {
 
         this.state.messages.push(message)
         this.setState({ messages: this.state.messages })
         console.log(this.state.messages)
 
+    }
+
+    deleteChannel = channelID => {
+        console.log(channelID)
+        axios.delete('/api/channel/' + channelID).then(function(response) {
+            console.log(response)
+        })
     }
 
     render() {
@@ -124,7 +127,7 @@ class ChannelPage extends React.Component {
                                 <li onClick={() => this.enterChannel(channel._id, channel.channelName)}
                                     key={channel._id}>{channel.channelName}
                                 </li>
-                                <button className="channel-delete">x</button>
+                                <button onClick={() => this.deleteChannel(channel._id)} className="channel-delete">x</button>
                             </div>
                         ))}
                     </ul>

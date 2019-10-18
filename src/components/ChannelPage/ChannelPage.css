@@ -71,6 +71,10 @@
     color: red;
   }
 
+  .channel-delete:active {
+    color: black;
+  }
+
   .channel-group  {
     display: flex;
     justify-content: center;
