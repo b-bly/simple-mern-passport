@@ -31,6 +31,7 @@ class MessageBox extends React.Component {
     }).then((response) => {
       console.log(response)
       this.props.setChannelState(response.data)
+      this.setState({ messageBoxVal: '' })
     })
   }
 

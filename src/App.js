@@ -33,9 +33,14 @@ class App extends Component {
     this.setState(userObject)
   }
 
+  signUpAndLogIn (loggedin, username) {
+    this.setState({loggedIn: loggedin, username: username})
+  }
+
   redirect () {
     return (<Redirect to="/" />);
   }
+  
   getUser() {
     axios.get('/user/').then(response => {
       console.log('Get user response: ')
@@ -81,7 +86,7 @@ class App extends Component {
         <Route
           path="/signup"
           render={() =>
-            <Signup />}
+            <Signup updateUser={this.updateUser} signUpAndLogIn={this.signUpAndLogIn} />}
         />
         {/* route for channels */}
         <Route
