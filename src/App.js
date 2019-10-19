@@ -14,12 +14,14 @@ import ChannelsNav from './components/ChannelsNav/ChannelsNav'
 class App extends Component {
   constructor() {
     super()
+
     this.state = {
       loggedIn: false,
       username: null,
       userID: null,
       selectedChannelID: '',
-      selectedChannelName: ''
+      selectedChannelName: '',
+      timestamp: 'no timestamp yet'
     }
 
     this.getUser = this.getUser.bind(this)
@@ -27,6 +29,7 @@ class App extends Component {
     this.updateUser = this.updateUser.bind(this)
   }
 
+    
   componentDidMount() {
     this.getUser()
   }
@@ -35,10 +38,10 @@ class App extends Component {
     this.setState(userObject)
   }
 
-  redirect () {
+  redirect() {
     return (<Redirect to="/" />);
   }
-  
+
   setAppState = (channelID, channelName) => {
     this.setState({ selectedChannelID: channelID, selectedChannelName: channelName })
   }
@@ -96,8 +99,8 @@ class App extends Component {
           render={() =>
             //render channels
             <div>
-            <ChannelsNav selectedChannelID={this.state.selectedChannelID} selectedChannelName={this.state.selectedChannelName} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
-            <ChannelPage setAppState={this.setAppState} updateUser={this.updateUser} loggedIn={this.state.loggedIn} userID={this.state.userID} user={this.state.username} />
+              <ChannelsNav  timestamp={this.state.timestamp}  selectedChannelID={this.state.selectedChannelID} selectedChannelName={this.state.selectedChannelName} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+              <ChannelPage setAppState={this.setAppState} updateUser={this.updateUser} loggedIn={this.state.loggedIn} userID={this.state.userID} user={this.state.username} />
             </div>
           }
         />
