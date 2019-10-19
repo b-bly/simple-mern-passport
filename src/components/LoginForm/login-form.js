@@ -3,16 +3,17 @@ import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 class LoginForm extends Component {
-    constructor() {
-        super()
-        this.state = {
-            username: '',
-            password: '',
-            redirectTo: null
-        }
+    constructor(props) {
+        super(props)
+       
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
   
+    }
+
+    state = {
+        username: '',
+        password: ''
     }
 
     handleChange(event) {
@@ -32,16 +33,13 @@ class LoginForm extends Component {
             })
             .then(response => {
                 console.log('login response: ')
-                console.log(response)
+                console.log(response.data)
                 if (response.status === 200) {
                     // update App.js state
                     this.props.updateUser({
                         loggedIn: true,
-                        username: response.data.username
-                    })
-                    // update the state to redirect to home
-                    this.setState({
-                        redirectTo: '/'
+                        username: response.data.username,
+                        userID: response.data.userID
                     })
                 }
             }).catch(error => {
@@ -52,16 +50,16 @@ class LoginForm extends Component {
     }
 
     render() {
-        if (this.state.redirectTo) {
-            return <Redirect to={{ pathname: this.state.redirectTo }} />
+        if (this.props.loggedIn) {
+            return <Redirect to={'/channels'} />
         } else {
             return (
-                <div>
+                <div className="mt-5">
                     <h4>Login</h4>
                     <form className="form-horizontal">
                         <div className="form-group">
                             <div className="col-1 col-ml-auto">
-                                <label className="form-label" htmlFor="username">Username</label>
+                                <label className="form-label" htmlFor="username">Username: </label>
                             </div>
                             <div className="col-3 col-mr-auto">
                                 <input className="form-input"
@@ -97,6 +95,9 @@ class LoginForm extends Component {
                                 type="submit">Login</button>
                         </div>
                     </form>
+                    <div>
+                        <img src="https://media.giphy.com/media/BrT2h4G7ldP6U/giphy.gif" style={{marginTop:50}} alt="Sign" width="300" height="225"></img>
+                    </div>
                 </div>
             )
         }

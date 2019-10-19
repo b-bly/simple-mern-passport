@@ -34,28 +34,38 @@ router.post(
     function (req, res, next) {
         console.log('routes/user.js, login, req.body: ');
         console.log(req.body)
+
         next()
     },
     passport.authenticate('local'),
     (req, res) => {
         console.log('logged in', req.user);
         var userInfo = {
-            username: req.user.username
+            username: req.user.username,
+            userID: req.user._id
         };
         res.send(userInfo);
     }
 )
 
 router.get('/', (req, res, next) => {
+    User.find({}).populate("channels").then(function(response) {
+        console.log(response)
+        
     console.log('===== user!!======')
     console.log(req.user)
     if (req.user) {
-        res.json({ user: req.user })
+        res.json({response: response, user: req.user})
     } else {
         res.json({ user: null })
     }
 })
-
+})
+router.get('/:userID', (req, res) => {
+    User.findById(req.params.userID).populate('channels').then(function(response) {
+        res.send(response)
+    })
+})
 router.post('/logout', (req, res) => {
     if (req.user) {
         req.logout()
