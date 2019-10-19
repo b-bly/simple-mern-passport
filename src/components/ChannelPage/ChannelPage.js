@@ -4,6 +4,8 @@ import MessageTop from '../Message/MessageTop'
 import axios from 'axios'
 import MessageBox from '../MessageBox/MessageBox'
 
+
+
 class ChannelPage extends React.Component {
     constructor(props) {
         super(props)
@@ -87,6 +89,8 @@ class ChannelPage extends React.Component {
         this.props.setAppState(channelID, channelName)
     }
 
+
+
     setChannelState = (message) => {
 
         this.state.messages.push(message)
@@ -137,11 +141,11 @@ class ChannelPage extends React.Component {
                     </ul>
                 </div>
                 <div className="content">
-                    <MessageTop />
-                    {this.state.messages.map(message => (
-                        <Message keyID={message._id} sender={this.props.user} text={message.messageBody} />
-                    ))}
-                </div>
+                   <MessageTop />
+                   {this.state.messages.map(message => (
+                       <Message keyID={message._id} sender={this.props.user} text={message.messageBody} />
+                   ))}
+               </div>
                 <div className="footer">
                     <MessageBox
                         userID={this.props.userID}
