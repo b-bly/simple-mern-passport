@@ -5,7 +5,7 @@
     width: 75%;
     margin-left: 25%;
     z-index: 1;
-    background-color: black;
+    background-image: url(../../images/space.JPG);
 }
 
 #send {
@@ -13,6 +13,14 @@
     border-top-right-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
     padding: 0 30px;
+    background: rgba(0, 0, 0, 0);
+    border-color: white;
+    color: white;
+}
+
+#send:active {
+    border-color: red;
+    color: red;
 }
 
 #input-and-button {

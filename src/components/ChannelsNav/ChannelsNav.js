@@ -6,8 +6,8 @@ import './ChannelsNav.css';
 import axios from 'axios'
 
 class Navbar extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.logout = this.logout.bind(this)
     }
 
@@ -69,6 +69,7 @@ class Navbar extends Component {
                     <div className="col-4 col-mr-auto">
                         <div id="top-filler"></div>
                         <h1 className="App-title">ChatSpace</h1>
+                        <h4>Current channel: {this.props.selectedChannelName}</h4>
                     </div>
                 </header>
             </div>

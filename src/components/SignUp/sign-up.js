@@ -5,9 +5,9 @@ import './sign-up.css'
 
 
 class Signup extends Component {
-	constructor() {
-		super()
-		
+	constructor(props) {
+		super(props)
+
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
 	}
@@ -39,10 +39,28 @@ class Signup extends Component {
 				if (response.status === 200) {
 					console.log('successful signup')
 					console.log(response)
-					this.setState({ //redirect to channels page
-						redirectTo: '/login'
-					})
+					axios
+						.post('/user/login', {
+							username: this.state.username,
+							password: this.state.password
+						})
+						.then(response => {
+							console.log('login response: ')
+							console.log(response.data)
+							if (response.status === 200) {
+								// update App.js state
+								this.props.updateUser({
+									loggedIn: true,
+									username: response.data.username,
+									userID: response.data.userID
+								})
+							}
+							this.setState({ redirectTo: '/channels' })
+						}).catch(error => {
+							console.log('login error: ')
+							console.log(error);
 
+						})
 				} else {
 					console.log('username already taken')
 				}
@@ -101,8 +119,8 @@ class Signup extends Component {
 						</div>
 					</form>
 					<div>
-                        <img src="https://media.giphy.com/media/BrT2h4G7ldP6U/giphy.gif" style={{marginTop:50}} alt="Sign" width="300" height="225"></img>
-                    </div>
+						<img src="https://media.giphy.com/media/BrT2h4G7ldP6U/giphy.gif" style={{ marginTop: 50 }} alt="Sign" width="300" height="225"></img>
+					</div>
 				</div>
 
 			)

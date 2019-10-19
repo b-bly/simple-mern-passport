@@ -18,7 +18,17 @@ class ChannelPage extends React.Component {
         selectedChannelName: '',
         messages: []
     };
-    
+
+    componentDidMount() {
+        if (this.props.loggedIn) {
+            this.getChannels()
+        }
+    }
+
+    channelHandleChange(event) {
+        this.setState({ inputValue: event.target.value })
+    }
+
     getChannels() {
         axios({
             method: 'get',
@@ -36,16 +46,6 @@ class ChannelPage extends React.Component {
                 console.log(this.state.channels)
             }
         })
-    }
-
-    componentDidMount() {
-        if (this.props.loggedIn) {
-            this.getChannels()
-        }
-    }
-
-    channelHandleChange(event) {
-        this.setState({ inputValue: event.target.value })
     }
 
     addChannel() {
@@ -74,10 +74,17 @@ class ChannelPage extends React.Component {
         console.log(channelID)
         console.log(this.state.selectedChannelID)
         axios.get('/api/messages/' + channelID).then((response) => {
-            //console.log(response)
-            this.setState({ messages: response.data })
+            console.log(response.data)
+            if (response.data.length === 0) {
+                this.setState({ messages: [{ messageBody: 'Looks like there are no messages here yet...' }] })
+                console.log(this.state.messages)
+            }
+            else {
+                this.setState({ messages: response.data })
+            }
             console.log(this.state.messages)
         })
+        this.props.setAppState(channelID, channelName)
     }
 
     setChannelState = (message) => {
@@ -88,49 +95,62 @@ class ChannelPage extends React.Component {
 
     }
 
+    deleteChannel = channelID => {
+        console.log(channelID)
+        axios.delete('/api/channel/' + channelID)
+            .then(function (response) {
+                console.log(response)
+            })
+    }
+
     render() {
-        
-            return (
-                <div>
 
-                    <div className="sidenav">
-                        <h4>Add a channel</h4>
+        return (
+            <div>
 
-                            <input className="inp w3-transparent w3-text-white" style={{padding: 8}}
-                                value={this.state.inputValue}
-                                type="text"
-                                placeholder="enter channel here"
-                                onChange={this.channelHandleChange}>
-                            </input>
+                <div className="sidenav">
+                    <h4>Add a channel</h4>
+                    <div id="add-channel-div">
+                        <input className="inp w3-transparent w3-text-white" style={{ padding: 8 }}
+                            value={this.state.inputValue}
+                            type="text"
+                            placeholder="enter channel here"
+                            onChange={this.channelHandleChange}>
+                        </input>
 
-                            <button
-                                className='w3-blue w3-hover-opacity w3-padding bttn'
-                                onClick={this.addChannel}>ADD +
+                        <button
+                            className='w3-hover-opacity bttn'
+                            onClick={this.addChannel}>+
                         </button>
+                    </div>
 
-                        <ul id="sidenav-ul">
-                            {this.state.channels.map(channel => (
-                                <li 
-                                    onClick={() => this.enterChannel(channel._id, channel.channelName)}
-                                    key={channel._id}>{channel.channelName}</li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className="content">
-                    <MessageTop />
-                        {this.state.messages.map(message => (
-                            <Message keyID={message._id} sender={this.props.user} text={message.messageBody} />
+
+                    <ul id="sidenav-ul">
+                        {this.state.channels.map(channel => (
+                            <div className="channel-group">
+                                <li onClick={() => this.enterChannel(channel._id, channel.channelName)}
+                                    key={channel._id}>{channel.channelName}
+                                </li>
+                                <button onClick={() => this.deleteChannel(channel._id)} className="channel-delete">x</button>
+                            </div>
                         ))}
-                    </div>
-                    <div className="footer">
-                        <MessageBox
-                            userID={this.props.userID}
-                            selectedChannelID={this.state.selectedChannelID}
-                            selectedChannelName={this.state.selectedChannelName}
-                            setChannelState={this.setChannelState} />
-                    </div>
+                    </ul>
                 </div>
-            )
+                <div className="content">
+                    <MessageTop />
+                    {this.state.messages.map(message => (
+                        <Message keyID={message._id} sender={this.props.user} text={message.messageBody} />
+                    ))}
+                </div>
+                <div className="footer">
+                    <MessageBox
+                        userID={this.props.userID}
+                        selectedChannelID={this.state.selectedChannelID}
+                        selectedChannelName={this.state.selectedChannelName}
+                        setChannelState={this.setChannelState} />
+                </div>
+            </div>
+        )
     }
 }
 export default ChannelPage;

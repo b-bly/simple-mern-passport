@@ -21,13 +21,24 @@ const imgSize = {
 
 
 function Message(props) {
-    return (
-        <div key={props.keyID} id="message-div" style={messageStyle}>
-
-            <p key={props.keyID}><img key={props.keyID} style={imgSize} src={avatar} alt="avatar" />{`${props.sender}: ${props.text}`}</p>
-
-        </div>
-    )
+    if (props.text !== 'Looks like there are no messages here yet...'){
+        return (
+            <div key={props.keyID} id="message-div" style={messageStyle}>
+    
+                <p key={props.keyID}><img key={props.keyID} style={imgSize} src={avatar} alt="avatar" />{`${props.sender}: ${props.text}`}</p>
+    
+            </div>
+        )
+    }
+    else {
+        return (
+            <div key={props.keyID} id="message-div" style={messageStyle}>
+    
+                <p key={props.keyID}><img key={props.keyID} style={imgSize} src={avatar} alt="avatar" />{`${props.text}`}</p>
+    
+            </div>
+        )
+    }
 }
 
 export default Message;
