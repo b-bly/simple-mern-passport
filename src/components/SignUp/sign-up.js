@@ -77,7 +77,7 @@ class Signup extends Component {
 			return <Redirect to={{ pathname: this.state.redirectTo }} />
 		} else {
 			return (
-				<div className="SignupForm mt-5">
+				<div className="SignupForm mt-5, Sf">
 					<h4>Sign up</h4>
 					<form className="form-horizontal">
 						<div className="form-group">
