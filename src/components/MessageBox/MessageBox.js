@@ -5,13 +5,6 @@ import openSocket from "socket.io-client";
 
 const socket = openSocket("http://localhost:8080");
 
-// function subscribeToTimer(cb) {
-//   socket.on('timer', timestamp => cb(null, timestamp));
-//   socket.emit('subscribeToTimer', 1000);
-// }
-
-// export { subscribeToTimer };
-
 socket.on('chat', function(msg){
   console.log(msg)
 })
@@ -37,11 +30,10 @@ class MessageBox extends React.Component {
       'channelID': this.props.selectedChannelID,
       'messageBody': this.state.messageBoxVal
     }
-    socket.emit('chat',message) 
+
+    socket.emit('chat', message) 
     this.props.setChannelState(message)   
      
-    
-   
     axios({
       method: 'post',
       url: '/api/messages/' + this.state.selectedChannelID,

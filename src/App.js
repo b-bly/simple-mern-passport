@@ -21,7 +21,6 @@ class App extends Component {
       userID: null,
       selectedChannelID: '',
       selectedChannelName: '',
-      timestamp: 'no timestamp yet'
     }
 
     this.getUser = this.getUser.bind(this)
@@ -99,7 +98,7 @@ class App extends Component {
           render={() =>
             //render channels
             <div>
-              <ChannelsNav  timestamp={this.state.timestamp}  selectedChannelID={this.state.selectedChannelID} selectedChannelName={this.state.selectedChannelName} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+              <ChannelsNav selectedChannelID={this.state.selectedChannelID} selectedChannelName={this.state.selectedChannelName} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
               <ChannelPage setAppState={this.setAppState} updateUser={this.updateUser} loggedIn={this.state.loggedIn} userID={this.state.userID} user={this.state.username} />
             </div>
           }

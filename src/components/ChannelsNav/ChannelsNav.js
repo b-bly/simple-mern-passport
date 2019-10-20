@@ -70,7 +70,6 @@ class Navbar extends Component {
                         <div id="top-filler"></div>
                         <h1 className="App-title">ChatSpace</h1>
                         <h4>Current channel: {this.props.selectedChannelName}</h4>
-                    <div>Timestamp: {this.props.timestamp}</div>
                     </div>
                 </header>
             </div>

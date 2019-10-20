@@ -2,6 +2,7 @@
     position: fixed;
     display: flex;
     width: 75%;
+    height: 15vh;
     margin-left: 25%;
     background-image: url('../../images/space.JPG');
 }

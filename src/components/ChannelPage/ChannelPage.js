@@ -140,8 +140,8 @@ class ChannelPage extends React.Component {
                         ))}
                     </ul>
                 </div>
-                <div className="content">
-                   <MessageTop />
+                <div id="message-output" className="content">
+                   {/* <MessageTop /> */}
                    {this.state.messages.map(message => (
                        <Message keyID={message._id} sender={this.props.user} text={message.messageBody} />
                    ))}

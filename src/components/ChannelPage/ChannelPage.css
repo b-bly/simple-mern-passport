@@ -38,11 +38,6 @@
     padding: 10px;
   }
 
-  .content {
-    margin-left: 25%;
-    padding: 80px 20px;
-  }
-
   #sidenav-ul {
     margin: 0 auto;
   }
@@ -120,4 +115,14 @@
     display: flex;
     flex-wrap: nowrap;
     margin: 0 auto;
+  }
+
+  #message-output {
+    position: fixed;
+    margin-left: 25%;
+    margin-top: 15vh;
+    height: 70vh;
+    width: 75%;
+    overflow-y: auto;
+    z-index: 888;
   }

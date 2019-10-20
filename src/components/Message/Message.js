@@ -25,7 +25,9 @@ function Message(props) {
         return (
             <div key={props.keyID} id="message-div" style={messageStyle}>
     
-                <p key={props.keyID}><img key={props.keyID} style={imgSize} src={avatar} alt="avatar" />{`${props.sender}: ${props.text}`}</p>
+                <p key={props.keyID}><img key={props.keyID} style={imgSize} src={avatar} alt="avatar" /><strong>
+                {`${props.sender}: `}
+                </strong>{`${props.text}`}</p>
     
             </div>
         )
