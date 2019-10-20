@@ -46,9 +46,6 @@ class Navbar extends Component {
                         ) : (
                                 <section className="">
                                     <div className="w3-container mt-3">
-                                    <Link to="/" className="w3-bar-item w3-button w3-border w3-round w3-text-white mr-3 w3-mobile">
-                                        home
-                                    </Link>
                                     <Link to="/login" className="w3-bar-item w3-button w3-border w3-round w3-text-white mr-3 w3-mobile">
                                         login
                                     </Link>

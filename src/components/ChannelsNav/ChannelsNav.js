@@ -54,9 +54,6 @@ class Navbar extends Component {
                             </section>
                         ) : (
                                 <section className="navbar-section">
-                                    <Link to="/" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">home</span>
-                                    </Link>
                                     <Link to="/login" className="btn btn-link text-secondary">
                                         <span className="text-secondary">login</span>
                                     </Link>
@@ -69,7 +66,7 @@ class Navbar extends Component {
                     <div className="col-4 col-mr-auto">
                         <div id="top-filler"></div>
                         <h1 className="App-title">ChatSpace</h1>
-                        <h4>Current channel: {this.props.selectedChannelName}</h4>
+                        <h4 id="current-channel">Current channel: {this.props.selectedChannelName}</h4>
                     </div>
                 </header>
             </div>

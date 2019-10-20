@@ -15,3 +15,7 @@
 #logout-button:hover {
     cursor: pointer;
 }
+
+#current-channel {
+    font-size: 0.9rem;
+}

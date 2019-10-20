@@ -51,6 +51,10 @@
     width: 70%
   }
 
+  .inp:focus {
+    outline: 0;
+  }
+
   .bttn {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -63,8 +67,8 @@
     color: white;
   }
   .bttn:active {
-    border-color: red;
-    color: red;
+    border-color: lime;
+    color: lime;
   }
 
   .channel-delete {

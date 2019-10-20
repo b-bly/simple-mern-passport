@@ -1,6 +1,5 @@
 import React from 'react';
 import Message from '../Message/Message'
-import MessageTop from '../Message/MessageTop'
 import axios from 'axios'
 import MessageBox from '../MessageBox/MessageBox'
 
@@ -78,7 +77,7 @@ class ChannelPage extends React.Component {
         axios.get('/api/messages/' + channelID).then((response) => {
             console.log(response.data)
             if (response.data.length === 0) {
-                this.setState({ messages: [{ messageBody: 'Looks like there are no messages here yet...' }] })
+                this.setState({ messages: [{ messageBody: 'This is the beginning of the conversation...' }] })
                 console.log(this.state.messages)
             }
             else {
@@ -104,7 +103,8 @@ class ChannelPage extends React.Component {
             return channel._id !== channelID;
         })
         console.log(remainingChannels)
-        this.setState({ channels: remainingChannels })
+        this.setState({ channels: remainingChannels, messages: [] })
+        this.props.setAppState('', '')
         axios.delete('/api/channel/' + channelID)
             .then(function (response) {
                 console.log(response)
@@ -145,7 +145,6 @@ class ChannelPage extends React.Component {
                     </ul>
                 </div>
                 <div id="message-output" className="content">
-                   {/* <MessageTop /> */}
                    {this.state.messages.map(message => (
                        <Message keyID={message._id} sender={this.props.user} text={message.messageBody} />
                    ))}
