@@ -17,7 +17,9 @@ class ChannelPage extends React.Component {
         channels: [],
         selectedChannelID: '',
         selectedChannelName: '',
-        messages: []
+        messages: [],
+        channelError: '',
+        active: false
     };
 
     componentDidMount() {
@@ -50,28 +52,33 @@ class ChannelPage extends React.Component {
     }
 
     addChannel() {
-        console.log(this.props.userID)
-        let userID = this.props.userID
-        let channel = {
-            "channelName": this.state.inputValue,
-            "messages": [],
-            "userID": userID
+        if (this.state.inputValue.length < 4 || this.state.inputValue.length > 20) {
+            this.setState({ channelError: 'channel name must be between 4-20 characters' })
         }
-        axios({
-            method: 'post',
-            url: '/api/channel',
-            data: channel
-        }).then((data) => {
-            let channelsArray = this.state.channels;
-            channelsArray.push(data)
-            // console.log(data)
-            this.setState({ channels: channelsArray, inputValue: '' });
-            this.getChannels();
-        })
+        else {
+            console.log(this.props.userID)
+            let userID = this.props.userID
+            let channel = {
+                "channelName": this.state.inputValue,
+                "messages": [],
+                "userID": userID
+            }
+            axios({
+                method: 'post',
+                url: '/api/channel',
+                data: channel
+            }).then((data) => {
+                let channelsArray = this.state.channels;
+                channelsArray.push(data)
+                // console.log(data)
+                this.setState({ channels: channelsArray, inputValue: '', channelError: '' });
+                this.getChannels();
+            })
+        }
     }
 
     enterChannel = (channelID, channelName) => {
-        this.setState({ selectedChannelID: channelID, selectedChannelName: channelName })
+        this.setState({ selectedChannelID: channelID, selectedChannelName: channelName, active: true })
         console.log(channelID)
         console.log(this.state.selectedChannelID)
         axios.get('/api/messages/' + channelID).then((response) => {
@@ -118,6 +125,7 @@ class ChannelPage extends React.Component {
 
                 <div className="sidenav">
                     <h4>Add a channel</h4>
+                    <div id="channel-error">{this.state.channelError}</div>
                     <div id="add-channel-div">
                         <input className="inp w3-transparent w3-text-white" style={{ padding: 8 }}
                             value={this.state.inputValue}
@@ -132,10 +140,10 @@ class ChannelPage extends React.Component {
                         </button>
                     </div>
 
-
+                    {this.state.channels.length ? <h4 id="existing-channels">Existing Channels</h4> : ''}
                     <ul id="sidenav-ul">
                         {this.state.channels.map(channel => (
-                            <div className="channel-group">
+                            <div className={'channel-group'}>
                                 <li onClick={() => this.enterChannel(channel._id, channel.channelName)}
                                     key={channel._id}>{channel.channelName}
                                 </li>
@@ -145,10 +153,10 @@ class ChannelPage extends React.Component {
                     </ul>
                 </div>
                 <div id="message-output" className="content">
-                   {this.state.messages.map(message => (
-                       <Message keyID={message._id} sender={this.props.user} text={message.messageBody} />
-                   ))}
-               </div>
+                    {this.state.messages.map(message => (
+                        <Message keyID={message._id} sender={this.props.user} text={message.messageBody} />
+                    ))}
+                </div>
                 <div className="footer">
                     <MessageBox
                         userID={this.props.userID}

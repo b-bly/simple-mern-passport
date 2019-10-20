@@ -90,29 +90,48 @@
   .channel-group  {
     display: flex;
     justify-content: center;
-    background-color: white;
+    background: none;
+    border: 1px solid white;
     list-style: none;
     font-size: 18px;
     text-transform: uppercase;
     background-color: black;
+    opacity: 0.7;
     border-radius: 5px;
-    opacity: .7;
     width: 80%;
     margin: 10px auto;
   }
   .channel-group:hover {
-    display: flex;
     cursor: pointer;
-    opacity: .7;
-    background-color: #f8f4f4;
+    opacity: .2;
+    background-color: white;
     color: black;
-    
   }
+
   .channel-group li {
     width: 70%;
     margin-bottom: 0.4rem;
   }
 
+  .active-channel {
+    display: flex;
+    justify-content: center;
+    background: none;
+    border: 1px solid white;
+    list-style: none;
+    font-size: 18px;
+    text-transform: uppercase;
+    background-color: white;
+    color: black;
+    opacity: 0.2;
+    border-radius: 5px;
+    width: 80%;
+    margin: 10px auto;
+  }
+
+  .active-channel:hover {
+    cursor: pointer;
+  }
   #add-channel-div {
     width: 80%;
     height: 40px;
@@ -130,3 +149,12 @@
     overflow-y: auto;
     z-index: 888;
   }
+
+  #channel-error {
+    color: red;
+  }
+
+  #existing-channels {
+    margin-top: 20px
+  }
+  
