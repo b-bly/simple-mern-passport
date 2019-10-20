@@ -4,12 +4,12 @@ import axios from 'axios'
 import MessageBox from '../MessageBox/MessageBox'
 
 
-
 class ChannelPage extends React.Component {
     constructor(props) {
         super(props)
         this.channelHandleChange = this.channelHandleChange.bind(this);
         this.addChannel = this.addChannel.bind(this);
+        this.enterChannel = this.enterChannel.bind(this)
     }
 
     state = {

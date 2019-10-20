@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../database/models/user')
 const passport = require('../passport')
+const Channel = require('../database/models/channel')
 
 router.post('/', (req, res) => {
     console.log('user signup');
@@ -73,6 +74,26 @@ router.post('/logout', (req, res) => {
     } else {
         res.send({ msg: 'no user to log out' })
     }
+})
+
+router.get('/invite/:username/:channelID', (req, res) => {
+    console.log('User req params')
+    console.log(req.params)
+    User.findOne({username: req.params.username})
+    .then(function(response) {
+        console.log("response")
+        console.log(response)
+        User.findOneAndUpdate({ _id: response._id }, { $push: { channels: req.params.channelID } }, { new: true })
+        .then(function(updatedUser) {
+            console.log('updatedUser')
+            console.log(updatedUser)
+            Channel.findOneAndUpdate({ _id: req.params.channelID }, { $push: { users: updatedUser._id } }, { new: true })
+            .then(function(updatedChannel) {
+                console.log("updatedChannel")
+                console.log(updatedChannel)
+            })
+        })
+    })
 })
 
 module.exports = router

@@ -45,7 +45,9 @@
   .inp {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    border-bottom-style: solid;
+    border-left: 1px solid white;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
     margin-bottom: 30px;
     height: 100%;
     width: 70%
@@ -58,6 +60,9 @@
   .bttn {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    border-right: 1px solid white;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
     border-left: none;
     cursor: pointer;
     height: 100%;
@@ -94,8 +99,7 @@
     border: 1px solid white;
     list-style: none;
     font-size: 18px;
-    background-color: black;
-    opacity: 0.7;
+    background-color: rgba(0, 0, 0, 0);
     border-radius: 5px;
     width: 80%;
     margin: 10px auto;
@@ -141,8 +145,8 @@
   #message-output {
     position: fixed;
     margin-left: 25%;
-    margin-top: 15vh;
-    height: 70vh;
+    margin-top: 25vh;
+    height: 60vh;
     width: 75%;
     overflow-y: auto;
     z-index: 888;
