@@ -5,7 +5,7 @@ import openSocket from "socket.io-client";
 
 const socket = openSocket("http://localhost:8080");
 
-socket.on('chat', function(msg){
+socket.on('chat', function (msg) {
   console.log(msg)
 })
 
@@ -23,11 +23,12 @@ class MessageBox extends React.Component {
     this.setState({ messageBoxVal: event.target.value })
   }
 
-  sendMessage = () => {
+  sendMessage = (event) => {
+    event.preventDefault();
     if (this.props.selectedChannelID === '') {
       console.log('enter a channel')
     }
-    else if (this.state.messageBoxVal === ''){
+    else if (this.state.messageBoxVal === '') {
       console.log('enter a message')
     }
     else {
@@ -37,10 +38,10 @@ class MessageBox extends React.Component {
         'channelID': this.props.selectedChannelID,
         'messageBody': this.state.messageBoxVal
       }
-  
-      socket.emit('chat', message) 
-      this.props.setChannelState(message)   
-       
+
+      socket.emit('chat', message)
+      this.props.setChannelState(message)
+
       axios({
         method: 'post',
         url: '/api/messages/' + this.state.selectedChannelID,
@@ -55,16 +56,14 @@ class MessageBox extends React.Component {
   render() {
     return (
 
-      <div id="message-box" className="fixed-bottom" >
-
+      <form id="message-box" className="fixed-bottom" onSubmit={this.sendMessage}>
         <div id="input-and-button" className="input-group mb-3 mx-auto">
-          <input onChange={this.messageHandleChange} value={this.state.messageBoxVal} id="message-input" type="text" className="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+          <input onChange={this.messageHandleChange} value={this.state.messageBoxVal} id="message-input" type="text" className="form-control" placeholder="enter message here" aria-label="Recipient's username" aria-describedby="basic-addon2" />
           <div id="send-div" className="input-group-append">
-            <button onClick={this.sendMessage} id="send" className="btn" type="button">Send</button>
+            <button id="send" className="btn" type="submit">Send</button>
           </div>
         </div>
-
-      </div>
+      </form>
     )
   }
 

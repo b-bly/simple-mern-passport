@@ -94,7 +94,6 @@
     border: 1px solid white;
     list-style: none;
     font-size: 18px;
-    text-transform: uppercase;
     background-color: black;
     opacity: 0.7;
     border-radius: 5px;
@@ -120,7 +119,6 @@
     border: 1px solid white;
     list-style: none;
     font-size: 18px;
-    text-transform: uppercase;
     background-color: white;
     color: black;
     opacity: 0.2;

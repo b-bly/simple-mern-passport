@@ -51,7 +51,8 @@ class ChannelPage extends React.Component {
         })
     }
 
-    addChannel() {
+    addChannel(event) {
+        event.preventDefault();
         if (this.state.inputValue.length < 4 || this.state.inputValue.length > 20) {
             this.setState({ channelError: 'channel name must be between 4-20 characters' })
         }
@@ -124,9 +125,9 @@ class ChannelPage extends React.Component {
             <div>
 
                 <div className="sidenav">
-                    <h4>Add a channel</h4>
+                    <h4>add a channel</h4>
                     <div id="channel-error">{this.state.channelError}</div>
-                    <div id="add-channel-div">
+                    <form onSubmit={this.addChannel} id="add-channel-div">
                         <input className="inp w3-transparent w3-text-white" style={{ padding: 8 }}
                             value={this.state.inputValue}
                             type="text"
@@ -134,13 +135,11 @@ class ChannelPage extends React.Component {
                             onChange={this.channelHandleChange}>
                         </input>
 
-                        <button
-                            className='w3-hover-opacity bttn'
-                            onClick={this.addChannel}>+
-                        </button>
-                    </div>
+                        <button className='w3-hover-opacity bttn'>+</button>
+                    </form>
 
-                    {this.state.channels.length ? <h4 id="existing-channels">Existing Channels</h4> : ''}
+                    {this.state.channels.length ? <h4 id="existing-channels">existing channels</h4> : ''}
+
                     <ul id="sidenav-ul">
                         {this.state.channels.map(channel => (
                             <div className={'channel-group'}>
