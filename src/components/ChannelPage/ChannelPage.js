@@ -100,7 +100,11 @@ class ChannelPage extends React.Component {
     }
 
     deleteChannel = channelID => {
-        console.log(channelID)
+        let remainingChannels = this.state.channels.filter((channel) => {
+            return channel._id !== channelID;
+        })
+        console.log(remainingChannels)
+        this.setState({ channels: remainingChannels })
         axios.delete('/api/channel/' + channelID)
             .then(function (response) {
                 console.log(response)
