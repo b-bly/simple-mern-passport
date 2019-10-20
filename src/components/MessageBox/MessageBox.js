@@ -24,24 +24,32 @@ class MessageBox extends React.Component {
   }
 
   sendMessage = () => {
-    let message = {
-      'channelName': this.props.selectedChannelName,
-      'sender': this.props.userID,
-      'channelID': this.props.selectedChannelID,
-      'messageBody': this.state.messageBoxVal
+    if (this.props.selectedChannelID === '') {
+      console.log('enter a channel')
     }
-
-    socket.emit('chat', message) 
-    this.props.setChannelState(message)   
-     
-    axios({
-      method: 'post',
-      url: '/api/messages/' + this.state.selectedChannelID,
-      data: message
-    }).then((response) => {
-      // console.log(response)
-      this.setState({ messageBoxVal: '' })
-    })
+    else if (this.state.messageBoxVal === ''){
+      console.log('enter a message')
+    }
+    else {
+      let message = {
+        'channelName': this.props.selectedChannelName,
+        'sender': this.props.userID,
+        'channelID': this.props.selectedChannelID,
+        'messageBody': this.state.messageBoxVal
+      }
+  
+      socket.emit('chat', message) 
+      this.props.setChannelState(message)   
+       
+      axios({
+        method: 'post',
+        url: '/api/messages/' + this.state.selectedChannelID,
+        data: message
+      }).then((response) => {
+        // console.log(response)
+        this.setState({ messageBoxVal: '' })
+      })
+    }
   }
 
   render() {
