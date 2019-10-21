@@ -11,6 +11,14 @@ class Navbar extends Component {
         this.logout = this.logout.bind(this)
     }
 
+    state = {
+        inputVal: ''
+    }
+
+    handleChange = event => {
+        this.setState({ inputVal: event.target.value })
+    }
+
     logout(event) {
         event.preventDefault()
         console.log('logging out')
@@ -30,14 +38,21 @@ class Navbar extends Component {
 
     }
 
+    inviteUser = event => {
+        event.preventDefault();
+        let username = this.state.inputVal;
+        axios.get('/user/invite/' + username + '/' + this.props.selectedChannelID)
+        .then(function(response) {
+            console.log(response)
+        })
+    }
+
     render() {
         const loggedIn = this.props.loggedIn;
-        console.log('navbar render, props: ')
-        console.log(this.props);
         if (!loggedIn) {
             return (<Redirect to="/" />);
         }
-        
+
         return (
             <div>
                 <header className="channels-navbar App-header" id="nav-container">
@@ -54,9 +69,6 @@ class Navbar extends Component {
                             </section>
                         ) : (
                                 <section className="navbar-section">
-                                    <Link to="/" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">home</span>
-                                    </Link>
                                     <Link to="/login" className="btn btn-link text-secondary">
                                         <span className="text-secondary">login</span>
                                     </Link>
@@ -66,16 +78,32 @@ class Navbar extends Component {
                                 </section>
                             )}
                     </div>
+
                     <div className="col-4 col-mr-auto">
                         <div id="top-filler"></div>
                         <h1 className="App-title">ChatSpace</h1>
-                        <h4>Current channel: {this.props.selectedChannelName}</h4>
-                    <div>Timestamp: {this.props.timestamp}</div>
+                        <h4 id="current-channel">{this.props.selectedChannelName}</h4>
+                        {this.props.selectedChannelName ?
+                            <div>
+                                <h5>Invite a friend:</h5>
+                                <form onSubmit={this.inviteUser}>
+                                    <input 
+                                        onChange={this.handleChange} 
+                                        value={this.state.inputVal} 
+                                        className="w3-transparent w3-text-white" 
+                                        id="invite-input" 
+                                        type="text" 
+                                        placeholder='their username'>
+                                    </input>
+                                    <button className="w3-hover-opacity" id="invite-button" type="submit">Invite</button>
+                                </form>
+                            </div>
+                            : ''}
                     </div>
                 </header>
             </div>
         );
-        
+
     }
 }
 

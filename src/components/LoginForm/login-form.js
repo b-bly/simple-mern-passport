@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
+import './login-form.css'
 
 class LoginForm extends Component {
     constructor(props) {
@@ -13,7 +14,8 @@ class LoginForm extends Component {
 
     state = {
         username: '',
-        password: ''
+        password: '',
+        IncorrectInfo: ''
     }
 
     handleChange(event) {
@@ -33,7 +35,7 @@ class LoginForm extends Component {
             })
             .then(response => {
                 console.log('login response: ')
-                console.log(response.data)
+                console.log(response.status)
                 if (response.status === 200) {
                     // update App.js state
                     this.props.updateUser({
@@ -42,10 +44,11 @@ class LoginForm extends Component {
                         userID: response.data.userID
                     })
                 }
+                
             }).catch(error => {
                 console.log('login error: ')
                 console.log(error);
-                
+                this.setState({IncorrectInfo: 'Incorrect username or password.'})
             })
     }
 
@@ -56,6 +59,9 @@ class LoginForm extends Component {
             return (
                 <div className="mt-5">
                     <h4>Login</h4>
+                    <div>
+                        New here? <Link to="/signup">Sign Up</Link>
+                    </div>
                     <form className="form-horizontal">
                         <div className="form-group">
                             <div className="col-1 col-ml-auto">
@@ -84,13 +90,14 @@ class LoginForm extends Component {
                                     value={this.state.password}
                                     onChange={this.handleChange}
                                 />
+                            <p style={{color: "red"}}>{this.state.IncorrectInfo}</p>
                             </div>
                         </div>
                         <div className="form-group ">
-                            <div className="col-7"></div>
+                            <div className="col-7" id="col7"></div>
                             <button
+                                id="login"
                                 className="btn btn-primary col-1 col-mr-auto"
-                               
                                 onClick={this.handleSubmit}
                                 type="submit">Login</button>
                         </div>

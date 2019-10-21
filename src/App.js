@@ -6,8 +6,6 @@ import { Redirect } from 'react-router-dom'
 // components
 import Signup from './components/SignUp/sign-up'
 import LoginForm from './components/LoginForm/login-form'
-import Navbar from './components/Navbar/navbar'
-import Home from './components/Home/home'
 import ChannelPage from './components/ChannelPage/ChannelPage'
 import ChannelsNav from './components/ChannelsNav/ChannelsNav'
 
@@ -21,7 +19,6 @@ class App extends Component {
       userID: null,
       selectedChannelID: '',
       selectedChannelName: '',
-      timestamp: 'no timestamp yet'
     }
 
     this.getUser = this.getUser.bind(this)
@@ -75,11 +72,11 @@ class App extends Component {
         <Route
           exact path="/"
           render={() =>
-            <div>
-              <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
-              <Home redirect={this.redirect} loggedIn={this.state.loggedIn} />
-            </div>
-          } />
+            <LoginForm
+              updateUser={this.updateUser}
+              loggedIn={this.state.loggedIn}
+            />}
+          />
         <Route
           path="/login"
           render={() =>
@@ -99,7 +96,7 @@ class App extends Component {
           render={() =>
             //render channels
             <div>
-              <ChannelsNav  timestamp={this.state.timestamp}  selectedChannelID={this.state.selectedChannelID} selectedChannelName={this.state.selectedChannelName} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+              <ChannelsNav selectedChannelID={this.state.selectedChannelID} selectedChannelName={this.state.selectedChannelName} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
               <ChannelPage setAppState={this.setAppState} updateUser={this.updateUser} loggedIn={this.state.loggedIn} userID={this.state.userID} user={this.state.username} />
             </div>
           }

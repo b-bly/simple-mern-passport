@@ -1,9 +1,7 @@
 import React from 'react';
 import Message from '../Message/Message'
-import MessageTop from '../Message/MessageTop'
 import axios from 'axios'
 import MessageBox from '../MessageBox/MessageBox'
-
 
 
 class ChannelPage extends React.Component {
@@ -11,6 +9,7 @@ class ChannelPage extends React.Component {
         super(props)
         this.channelHandleChange = this.channelHandleChange.bind(this);
         this.addChannel = this.addChannel.bind(this);
+        this.enterChannel = this.enterChannel.bind(this)
     }
 
     state = {
@@ -18,7 +17,9 @@ class ChannelPage extends React.Component {
         channels: [],
         selectedChannelID: '',
         selectedChannelName: '',
-        messages: []
+        messages: [],
+        channelError: '',
+        active: false
     };
 
     componentDidMount() {
@@ -50,35 +51,41 @@ class ChannelPage extends React.Component {
         })
     }
 
-    addChannel() {
-        console.log(this.props.userID)
-        let userID = this.props.userID
-        let channel = {
-            "channelName": this.state.inputValue,
-            "messages": [],
-            "userID": userID
+    addChannel(event) {
+        event.preventDefault();
+        if (this.state.inputValue.length < 4 || this.state.inputValue.length > 20) {
+            this.setState({ channelError: 'channel name must be between 4-20 characters' })
         }
-        axios({
-            method: 'post',
-            url: '/api/channel',
-            data: channel
-        }).then((data) => {
-            let channelsArray = this.state.channels;
-            channelsArray.push(data)
-            // console.log(data)
-            this.setState({ channels: channelsArray, inputValue: '' });
-            this.getChannels();
-        })
+        else {
+            console.log(this.props.userID)
+            let userID = this.props.userID
+            let channel = {
+                "channelName": this.state.inputValue,
+                "messages": [],
+                "userID": userID
+            }
+            axios({
+                method: 'post',
+                url: '/api/channel',
+                data: channel
+            }).then((data) => {
+                let channelsArray = this.state.channels;
+                channelsArray.push(data)
+                // console.log(data)
+                this.setState({ channels: channelsArray, inputValue: '', channelError: '' });
+                this.getChannels();
+            })
+        }
     }
 
     enterChannel = (channelID, channelName) => {
-        this.setState({ selectedChannelID: channelID, selectedChannelName: channelName })
+        this.setState({ selectedChannelID: channelID, selectedChannelName: channelName, active: true })
         console.log(channelID)
         console.log(this.state.selectedChannelID)
         axios.get('/api/messages/' + channelID).then((response) => {
             console.log(response.data)
             if (response.data.length === 0) {
-                this.setState({ messages: [{ messageBody: 'Looks like there are no messages here yet...' }] })
+                this.setState({ messages: [{ messageBody: 'This is the beginning of the conversation...' }] })
                 console.log(this.state.messages)
             }
             else {
@@ -100,7 +107,12 @@ class ChannelPage extends React.Component {
     }
 
     deleteChannel = channelID => {
-        console.log(channelID)
+        let remainingChannels = this.state.channels.filter((channel) => {
+            return channel._id !== channelID;
+        })
+        console.log(remainingChannels)
+        this.setState({ channels: remainingChannels, messages: [] })
+        this.props.setAppState('', '')
         axios.delete('/api/channel/' + channelID)
             .then(function (response) {
                 console.log(response)
@@ -113,8 +125,9 @@ class ChannelPage extends React.Component {
             <div>
 
                 <div className="sidenav">
-                    <h4>Add a channel</h4>
-                    <div id="add-channel-div">
+                    <h4>add a channel</h4>
+                    <div id="channel-error">{this.state.channelError}</div>
+                    <form onSubmit={this.addChannel} id="add-channel-div">
                         <input className="inp w3-transparent w3-text-white" style={{ padding: 8 }}
                             value={this.state.inputValue}
                             type="text"
@@ -122,16 +135,14 @@ class ChannelPage extends React.Component {
                             onChange={this.channelHandleChange}>
                         </input>
 
-                        <button
-                            className='w3-hover-opacity bttn'
-                            onClick={this.addChannel}>+
-                        </button>
-                    </div>
+                        <button className='w3-hover-opacity bttn'>+</button>
+                    </form>
 
+                    {this.state.channels.length ? <h4 id="existing-channels">existing channels</h4> : ''}
 
                     <ul id="sidenav-ul">
                         {this.state.channels.map(channel => (
-                            <div className="channel-group">
+                            <div className={'channel-group'}>
                                 <li onClick={() => this.enterChannel(channel._id, channel.channelName)}
                                     key={channel._id}>{channel.channelName}
                                 </li>
@@ -140,12 +151,11 @@ class ChannelPage extends React.Component {
                         ))}
                     </ul>
                 </div>
-                <div className="content">
-                   <MessageTop />
-                   {this.state.messages.map(message => (
-                       <Message keyID={message._id} sender={this.props.user} text={message.messageBody} />
-                   ))}
-               </div>
+                <div id="message-output" className="content">
+                    {this.state.messages.map(message => (
+                        <Message keyID={message._id} sender={this.props.user} text={message.messageBody} />
+                    ))}
+                </div>
                 <div className="footer">
                     <MessageBox
                         userID={this.props.userID}

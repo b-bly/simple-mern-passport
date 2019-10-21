@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     width: 75%;
+    height: 15vh;
     margin-left: 25%;
     z-index: 1;
     background-image: url(../../images/space.JPG);
@@ -31,5 +32,8 @@
 #message-input {
     height: 50%;
     border-width:0px;
-    border:none;
+    border: 1px solid white;
+    background: rgba(0, 0, 0, 0);
+    color: white;
+    
 }
