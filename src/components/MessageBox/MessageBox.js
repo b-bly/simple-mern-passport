@@ -34,7 +34,7 @@ class MessageBox extends React.Component {
     else {
       let message = {
         'channelName': this.props.selectedChannelName,
-        'sender': this.props.userID,
+        'sender': this.props.user,
         'channelID': this.props.selectedChannelID,
         'messageBody': this.state.messageBoxVal
       }
@@ -42,14 +42,14 @@ class MessageBox extends React.Component {
       socket.emit('chat', message)
       this.props.setChannelState(message)
 
-      axios({
-        method: 'post',
-        url: '/api/messages/' + this.state.selectedChannelID,
-        data: message
-      }).then((response) => {
-        // console.log(response)
-        this.setState({ messageBoxVal: '' })
-      })
+      // axios({
+      //   method: 'post',
+      //   url: '/api/messages/' + this.state.selectedChannelID,
+      //   data: message
+      // }).then((response) => {
+      //   // console.log(response)
+      //   this.setState({ messageBoxVal: '' })
+      // })
     }
   }
 

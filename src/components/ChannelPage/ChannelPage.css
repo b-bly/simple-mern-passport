@@ -45,10 +45,13 @@
   .inp {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+    border-right-width: 1px;
     border-left: 1px solid white;
     border-top: 1px solid white;
     border-bottom: 1px solid white;
     margin-bottom: 30px;
+    background: rgba(0, 0, 0, 0);
+    color: white;
     height: 100%;
     width: 70%
   }

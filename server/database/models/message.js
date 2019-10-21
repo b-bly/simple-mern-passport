@@ -6,7 +6,7 @@ mongoose.promise = Promise
 const messageSchema = new Schema({
 
     channelName: String,
-    sender: { type: Schema.Types.ObjectId, ref: "user" },
+    sender: { type: String, ref: "user" },
     channelID: { type: Schema.Types.ObjectId, ref: "channel" },
     messageBody: String
 
