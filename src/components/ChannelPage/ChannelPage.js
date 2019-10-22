@@ -27,7 +27,6 @@ class ChannelPage extends React.Component {
             this.getChannels()
         }
     }
-
     channelHandleChange(event) {
         this.setState({ inputValue: event.target.value })
     }
@@ -82,18 +81,27 @@ class ChannelPage extends React.Component {
         this.setState({ selectedChannelID: channelID, selectedChannelName: channelName, active: true })
         console.log(channelID)
         console.log(this.state.selectedChannelID)
-        axios.get('/api/messages/' + channelID).then((response) => {
-            console.log(response.data)
-            if (response.data.length === 0) {
-                this.setState({ messages: [{ messageBody: 'This is the beginning of the conversation...' }] })
+        //setInterval(() => {
+            axios.get('/api/messages/' + channelID).then((response) => {
+                console.log('enter channel response')
+                console.log(response)
+                if (response.data.length === 0) {
+                    this.setState({ messages: [{ messageBody: 'This is the beginning of the conversation...' }] })
+                    console.log(this.state.messages)
+                }
+                else {
+                    // let message = {
+                    //     channelID: response.data.channelID,
+                    //     channelName: response.data.channelName,
+                    //     messageBody: response.data.messageBody,
+                    //     sender: response.data.sender
+                    // }
+                    this.setState({ messages: response.data })
+                }
                 console.log(this.state.messages)
-            }
-            else {
-                this.setState({ messages: response.data })
-            }
-            console.log(this.state.messages)
-        })
-        this.props.setAppState(channelID, channelName)
+            })
+            this.props.setAppState(channelID, channelName)
+        //}, 2000)
     }
 
 
@@ -128,14 +136,14 @@ class ChannelPage extends React.Component {
                     <h4>add a channel</h4>
                     <div id="channel-error">{this.state.channelError}</div>
                     <form onSubmit={this.addChannel} id="add-channel-div">
-                        <input className="inp w3-transparent w3-text-white" style={{ padding: 8 }}
+                        <input className="inp " style={{ padding: 8 }}
                             value={this.state.inputValue}
                             type="text"
                             placeholder="enter channel here"
                             onChange={this.channelHandleChange}>
                         </input>
 
-                        <button className='w3-hover-opacity bttn'>+</button>
+                        <button className='bttn'>+</button>
                     </form>
 
                     {this.state.channels.length ? <h4 id="existing-channels">existing channels</h4> : ''}
@@ -153,12 +161,13 @@ class ChannelPage extends React.Component {
                 </div>
                 <div id="message-output" className="content">
                     {this.state.messages.map(message => (
-                        <Message keyID={message._id} sender={this.props.user} text={message.messageBody} />
+                        <Message keyID={message._id} sender={message.sender} text={message.messageBody} />
                     ))}
                 </div>
                 <div className="footer">
                     <MessageBox
                         userID={this.props.userID}
+                        user={this.props.user}
                         selectedChannelID={this.state.selectedChannelID}
                         selectedChannelName={this.state.selectedChannelName}
                         setChannelState={this.setChannelState} />
@@ -167,4 +176,5 @@ class ChannelPage extends React.Component {
         )
     }
 }
+
 export default ChannelPage;
