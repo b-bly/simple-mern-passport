@@ -91,6 +91,7 @@ router.get('/invite/:username/:channelID', (req, res) => {
             .then(function(updatedChannel) {
                 console.log("updatedChannel")
                 console.log(updatedChannel)
+                res.send(updatedChannel)
             })
         })
     })

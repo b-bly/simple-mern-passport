@@ -44,6 +44,7 @@ class Navbar extends Component {
         axios.get('/user/invite/' + username + '/' + this.props.selectedChannelID)
         .then(function(response) {
             console.log(response)
+            this.setState({inputVal: ''})
         })
     }
 

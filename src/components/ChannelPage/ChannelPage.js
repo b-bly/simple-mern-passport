@@ -27,7 +27,6 @@ class ChannelPage extends React.Component {
             this.getChannels()
         }
     }
-
     channelHandleChange(event) {
         this.setState({ inputValue: event.target.value })
     }
@@ -177,4 +176,5 @@ class ChannelPage extends React.Component {
         )
     }
 }
+
 export default ChannelPage;

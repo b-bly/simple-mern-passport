@@ -45,20 +45,21 @@ if (process.env.NODE_ENV === "production") {
 
 //Socket Connection
 io.on('connection', (socket) => {
+	socket.removeAllListeners();
 	console.log('made socket connection', socket.id);
 	// Handle chat event
 	socket.on('chat', function(data){
 		console.log("socket data")
 		console.log(data);
-		io.sockets.emit('chat', data);
+		socket.broadcast.emit('chat', data);
 		return MessageModel.create({
 			"channelName": data.channelName,
 			"sender": data.sender,
 			"channelID": data.channelID,
 			"messageBody": data.messageBody
 		}).then(function (message) {
-			console.log('message: ')
-			console.log(message)
+			// console.log('message: ')
+			// console.log(message)
 			
 			return ChannelModel.findOneAndUpdate({ _id: message.channelID }, { $push: { messages: message._id } }, { new: true })
 		})
