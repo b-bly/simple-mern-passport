@@ -25,10 +25,20 @@ class ChannelPage extends React.Component {
     componentDidMount() {
         if (this.props.loggedIn) {
             this.getChannels()
+            this.scrollToBottom();
         }
     }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+
     channelHandleChange(event) {
         this.setState({ inputValue: event.target.value })
+    }
+
+    scrollToBottom = () => {
+        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
     }
 
     getChannels() {
@@ -82,25 +92,25 @@ class ChannelPage extends React.Component {
         console.log(channelID)
         console.log(this.state.selectedChannelID)
         //setInterval(() => {
-            axios.get('/api/messages/' + channelID).then((response) => {
-                console.log('enter channel response')
-                console.log(response)
-                if (response.data.length === 0) {
-                    this.setState({ messages: [{ messageBody: 'This is the beginning of the conversation...' }] })
-                    console.log(this.state.messages)
-                }
-                else {
-                    // let message = {
-                    //     channelID: response.data.channelID,
-                    //     channelName: response.data.channelName,
-                    //     messageBody: response.data.messageBody,
-                    //     sender: response.data.sender
-                    // }
-                    this.setState({ messages: response.data })
-                }
+        axios.get('/api/messages/' + channelID).then((response) => {
+            console.log('enter channel response')
+            console.log(response)
+            if (response.data.length === 0) {
+                this.setState({ messages: [{ messageBody: 'This is the beginning of the conversation...' }] })
                 console.log(this.state.messages)
-            })
-            this.props.setAppState(channelID, channelName)
+            }
+            else {
+                // let message = {
+                //     channelID: response.data.channelID,
+                //     channelName: response.data.channelName,
+                //     messageBody: response.data.messageBody,
+                //     sender: response.data.sender
+                // }
+                this.setState({ messages: response.data })
+            }
+            console.log(this.state.messages)
+        })
+        this.props.setAppState(channelID, channelName)
         //}, 2000)
     }
 
@@ -163,6 +173,9 @@ class ChannelPage extends React.Component {
                     {this.state.messages.map(message => (
                         <Message keyID={message._id} sender={message.sender} text={message.messageBody} />
                     ))}
+                    <div style={{ float: "left", clear: "both" }}
+                        ref={(el) => { this.messagesEnd = el; }}>
+                    </div>
                 </div>
                 <div className="footer">
                     <MessageBox
