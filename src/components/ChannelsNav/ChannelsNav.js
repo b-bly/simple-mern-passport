@@ -44,7 +44,6 @@ class Navbar extends Component {
         axios.get('/user/invite/' + username + '/' + this.props.selectedChannelID)
         .then(function(response) {
             console.log(response)
-            this.setState({inputVal: ''})
         })
     }
 
@@ -57,30 +56,9 @@ class Navbar extends Component {
         return (
             <div>
                 <header className="channels-navbar App-header" id="nav-container">
-                    <div className="col-4" >
-                        {loggedIn ? (
-                            <section className="navbar-section">
-                                <button id="logout-button" className="w3-text-white w3-padding w3-border w3-round w3-hover-opacity" onClick={this.logout}>
-                                    <span>LOGOUT</span>
-                                </button>
+                    
 
-                                {/* <p>Join the party, {this.props.username}!</p> */}
-
-
-                            </section>
-                        ) : (
-                                <section className="navbar-section">
-                                    <Link to="/login" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">login</span>
-                                    </Link>
-                                    <Link to="/signup" className="btn btn-link">
-                                        <span className="text-secondary">sign up</span>
-                                    </Link>
-                                </section>
-                            )}
-                    </div>
-
-                    <div className="col-4 col-mr-auto">
+                    <div className="col-4 mx-auto">
                         <div id="top-filler"></div>
                         <h1 className="App-title">ChatSpace</h1>
                         <h4 id="current-channel">{this.props.selectedChannelName}</h4>
@@ -100,6 +78,28 @@ class Navbar extends Component {
                                 </form>
                             </div>
                             : ''}
+                    </div>
+                    <div className="logout-button-div" >
+                        {loggedIn ? (
+                            <section className="">
+                                <button id="logout-button" className="w3-text-white w3-padding w3-border w3-round w3-hover-opacity" onClick={this.logout}>
+                                    <span>LOGOUT</span>
+                                </button>
+
+                                {/* <p>Join the party, {this.props.username}!</p> */}
+
+
+                            </section>
+                        ) : (
+                                <section className="navbar-section">
+                                    <Link to="/login" className="btn btn-link text-secondary">
+                                        <span className="text-secondary">login</span>
+                                    </Link>
+                                    <Link to="/signup" className="btn btn-link">
+                                        <span className="text-secondary">sign up</span>
+                                    </Link>
+                                </section>
+                            )}
                     </div>
                 </header>
             </div>

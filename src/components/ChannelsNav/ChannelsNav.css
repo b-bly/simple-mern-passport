@@ -44,6 +44,11 @@
     background: none;
     border: none;
 }
+.logout-button-div {
+    position: fixed;
+    margin-left: 63vw;
+    margin-top: -7vh;
+}
 
 #logout-button:hover {
     cursor: pointer;
