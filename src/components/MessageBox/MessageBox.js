@@ -2,16 +2,32 @@ import React from 'react'
 import './MessageBox.css'
 import axios from 'axios'
 import openSocket from "socket.io-client";
-const socket = openSocket("http://localhost:8080");
+import io from 'socket.io-client';
+import { subscribeToChat } from '../../api'
+const socket = io("http://localhost:8080");
 
+// socket.on('connect', function() {
+//   console.log('connected to socket')
+// })
 
-
-// export { getMessage }
+// socket.on('chat', msg => {
+//   console.log(msg)
+//   //this.props.setChannelState(msg)
+// })
 
 class MessageBox extends React.Component {
   constructor(props) {
     super(props)
     this.messageHandleChange = this.messageHandleChange.bind(this)
+    subscribeToChat((err, msg) => {
+      if (err) {
+        console.log('err')
+        console.log(err)
+      }
+      //console.log('msg')
+      //console.log(msg)
+      this.props.setChannelState(msg)
+    })
   }
 
   state = {
@@ -37,13 +53,9 @@ class MessageBox extends React.Component {
         'messageBody': this.state.messageBoxVal
       }
 
-      socket.emit('chat', message)
-      socket.on('chat', msg => {
-        console.log(msg)
-        //socket.emit('chat', msg)
-        this.props.setChannelState(msg)
-      })
-      this.props.setChannelState(message)
+      socket.emit('msg', message)
+      
+      //this.props.setChannelState(message)
       this.setState({ messageBoxVal: '' })
     }
   }
