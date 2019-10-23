@@ -3,22 +3,19 @@ import './MessageBox.css'
 import axios from 'axios'
 import openSocket from "socket.io-client";
 import io from 'socket.io-client';
-import { subscribeToChat } from '../../api'
+import { subscribeToChat, listenForTyping } from '../../api'
 const socket = io("http://localhost:8080");
 
 // socket.on('connect', function() {
 //   console.log('connected to socket')
 // })
 
-// socket.on('chat', msg => {
-//   console.log(msg)
-//   //this.props.setChannelState(msg)
-// })
 
 class MessageBox extends React.Component {
   constructor(props) {
     super(props)
     this.messageHandleChange = this.messageHandleChange.bind(this)
+    
     subscribeToChat((err, msg) => {
       if (err) {
         console.log('err')
@@ -27,14 +24,30 @@ class MessageBox extends React.Component {
       //console.log('msg')
       //console.log(msg)
       this.props.setChannelState(msg)
+      this.props.setUserIsTyping(false, '')
+    })
+
+    listenForTyping((err, data) => {
+      if (err) {
+        console.log('err')
+        console.log(err)
+      }
+      this.props.setUserIsTyping(true, data)
     })
   }
 
   state = {
     messageBoxVal: ''
   }
-  messageHandleChange(event) {
+
+  messageHandleChange = event => {
     this.setState({ messageBoxVal: event.target.value })
+    if (this.state.messageBoxVal.length > 2) {
+      socket.emit('typing', `${this.props.user} is typing...`)
+    }
+    else {
+      this.props.setUserIsTyping(false, '')
+    }
   }
 
   sendMessage = (event) => {
@@ -54,8 +67,8 @@ class MessageBox extends React.Component {
       }
 
       socket.emit('msg', message)
-      
-      //this.props.setChannelState(message)
+      this.props.setUserIsTyping(false, '')
+      console.log(this.props.userIsTyping)
       this.setState({ messageBoxVal: '' })
     }
   }

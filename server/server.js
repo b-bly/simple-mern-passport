@@ -66,6 +66,7 @@ io.on('connection', (socket) => {
 	});
 	// Handle typing event
 	socket.on('typing', function(data){
+		console.log('user is typing')
 		socket.broadcast.emit('typing', data);
 	});
  });

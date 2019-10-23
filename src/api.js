@@ -9,4 +9,9 @@ function subscribeToChat (cb) {
       })
 }
 
-export { subscribeToChat }
+function listenForTyping (cb) {
+  socket.on('typing', data => {
+    cb(null, data)
+  })
+}
+export { subscribeToChat, listenForTyping }

@@ -19,7 +19,9 @@ class ChannelPage extends React.Component {
         selectedChannelName: '',
         messages: [],
         channelError: '',
-        active: false
+        active: false,
+        userIsTyping: false,
+        typingMessage: ''
     };
 
     componentDidMount() {
@@ -39,6 +41,11 @@ class ChannelPage extends React.Component {
 
     scrollToBottom = () => {
         this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    }
+
+    setUserIsTyping = (isTyping, data) => {
+        console.log(data)
+        this.setState({ userIsTyping: isTyping, typingMessage: data })
     }
 
     getChannels() {
@@ -171,8 +178,13 @@ class ChannelPage extends React.Component {
                 </div>
                 <div id="message-output" className="content">
                     {this.state.messages.map(message => (
-                        <Message keyID={message._id} sender={message.sender} text={message.messageBody} />
+                        <Message
+                         userIsTyping={this.state.userIsTyping} 
+                         keyID={message._id} 
+                         sender={message.sender} 
+                         text={message.messageBody} />
                     ))}
+                    {this.state.userIsTyping ? <div id="typing-message">{this.state.typingMessage}</div> : ''}
                     <div style={{ float: "left", clear: "both" }}
                         ref={(el) => { this.messagesEnd = el; }}>
                     </div>
@@ -183,7 +195,9 @@ class ChannelPage extends React.Component {
                         user={this.props.user}
                         selectedChannelID={this.state.selectedChannelID}
                         selectedChannelName={this.state.selectedChannelName}
-                        setChannelState={this.setChannelState} />
+                        setChannelState={this.setChannelState}
+                        setUserIsTyping={this.setUserIsTyping}
+                        userIsTyping={this.state.userIsTyping} />
                 </div>
             </div>
         )
