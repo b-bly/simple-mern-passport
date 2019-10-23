@@ -143,7 +143,7 @@ class ChannelPage extends React.Component {
             <div>
 
                 <div className="sidenav">
-                    <h4>add a channel</h4>
+                    <h4>Add a Channel</h4>
                     <div id="channel-error">{this.state.channelError}</div>
                     <form onSubmit={this.addChannel} id="add-channel-div">
                         <input className="inp " style={{ padding: 8 }}
@@ -156,7 +156,7 @@ class ChannelPage extends React.Component {
                         <button className='bttn'>+</button>
                     </form>
 
-                    {this.state.channels.length ? <h4 id="existing-channels">existing channels</h4> : ''}
+                    {this.state.channels.length ? <h4 id="existing-channels">Existing Channels</h4> : ''}
 
                     <ul id="sidenav-ul">
                         {this.state.channels.map(channel => (

@@ -83,6 +83,12 @@ router.get('/invite/:username/:channelID', (req, res) => {
     .then(function(response) {
         console.log("response")
         console.log(response)
+        if (response) {
+            res.send({status: 200})
+        }
+        else {
+            res.send({status: 404})
+        }
         User.findOneAndUpdate({ _id: response._id }, { $push: { channels: req.params.channelID } }, { new: true })
         .then(function(updatedUser) {
             console.log('updatedUser')

@@ -57,3 +57,20 @@
 #current-channel {
     font-size: 0.9rem;
 }
+
+#invite-response {
+    width: 100%;
+    font-size: 13px;
+}
+
+.nav-info {
+    width: 500px;
+}
+
+.green {
+    color: lime;
+}
+
+.red {
+    color: red;
+}

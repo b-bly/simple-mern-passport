@@ -12,7 +12,9 @@ class Navbar extends Component {
     }
 
     state = {
-        inputVal: ''
+        inputVal: '',
+        inviteMessage: '',
+        inviteMessageClass: ''
     }
 
     handleChange = event => {
@@ -42,8 +44,22 @@ class Navbar extends Component {
         event.preventDefault();
         let username = this.state.inputVal;
         axios.get('/user/invite/' + username + '/' + this.props.selectedChannelID)
-        .then(function(response) {
+        .then((response) => {
             console.log(response)
+            if(response.data.status === 200) {
+                this.setState({ 
+                    inviteMessage: `Successfully added ${this.state.inputVal} to the channel`, 
+                    inputVal: '', 
+                    inviteMessageClass: 'green'
+                 })
+                 setTimeout(() =>{this.setState({inviteMessageClass: '', inviteMessage: ''})}, 3000)
+            }
+            else {
+                this.setState({ 
+                    inviteMessage: `Failed to add ${this.state.inputVal} to the channel`, 
+                    inviteMessageClass: 'red' 
+                })
+            }
         })
     }
 
@@ -58,7 +74,7 @@ class Navbar extends Component {
                 <header className="channels-navbar App-header" id="nav-container">
                     
 
-                    <div className="col-4 mx-auto">
+                    <div className="nav-info mx-auto">
                         <div id="top-filler"></div>
                         <h1 className="App-title">ChatSpace</h1>
                         <h4 id="current-channel">{this.props.selectedChannelName}</h4>
@@ -76,6 +92,7 @@ class Navbar extends Component {
                                     </input>
                                     <button className="w3-hover-opacity" id="invite-button" type="submit">Invite</button>
                                 </form>
+                                <div className={this.state.inviteMessageClass} id="invite-response">{this.state.inviteMessage}</div>
                             </div>
                             : ''}
                     </div>
@@ -83,7 +100,7 @@ class Navbar extends Component {
                         {loggedIn ? (
                             <section className="">
                                 <button id="logout-button" className="w3-text-white w3-padding w3-border w3-round w3-hover-opacity" onClick={this.logout}>
-                                    <span>LOGOUT</span>
+                                    <span>Log Out</span>
                                 </button>
 
                                 {/* <p>Join the party, {this.props.username}!</p> */}
