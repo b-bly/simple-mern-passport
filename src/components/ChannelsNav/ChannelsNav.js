@@ -23,9 +23,7 @@ class Navbar extends Component {
 
     logout(event) {
         event.preventDefault()
-        console.log('logging out')
         axios.post('/user/logout').then(response => {
-            console.log(response.data)
             if (response.status === 200) {
                 this.props.updateUser({
                     loggedIn: false,
@@ -34,7 +32,6 @@ class Navbar extends Component {
             }
 
         }).catch(error => {
-            console.log('Logout error')
             console.log(error)
         })
 
@@ -45,7 +42,6 @@ class Navbar extends Component {
         let username = this.state.inputVal;
         axios.get('/user/invite/' + username + '/' + this.props.selectedChannelID)
         .then((response) => {
-            console.log(response)
             if(response.data.status === 200) {
                 this.setState({ 
                     inviteMessage: `Successfully added ${this.state.inputVal} to the channel`, 

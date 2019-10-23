@@ -44,7 +44,6 @@ class ChannelPage extends React.Component {
     }
 
     setUserIsTyping = (isTyping, data) => {
-        console.log(data)
         this.setState({ userIsTyping: isTyping, typingMessage: data })
     }
 
@@ -53,16 +52,12 @@ class ChannelPage extends React.Component {
             method: 'get',
             url: '/user/' + this.props.userID,
         }).then((data) => {
-            console.log(data)
             if (data) {
-                console.log(data)
                 let channelsArray = [];
-                //console.log(data.data[0]);
                 data.data.channels.forEach(channel => {
                     channelsArray.push(channel)
                 });
                 this.setState({ channels: channelsArray });
-                console.log(this.state.channels)
             }
         })
     }
@@ -73,7 +68,6 @@ class ChannelPage extends React.Component {
             this.setState({ channelError: 'channel name must be between 4-20 characters' })
         }
         else {
-            console.log(this.props.userID)
             let userID = this.props.userID
             let channel = {
                 "channelName": this.state.inputValue,
@@ -87,7 +81,6 @@ class ChannelPage extends React.Component {
             }).then((data) => {
                 let channelsArray = this.state.channels;
                 channelsArray.push(data)
-                // console.log(data)
                 this.setState({ channels: channelsArray, inputValue: '', channelError: '' });
                 this.getChannels();
             })
@@ -96,15 +89,11 @@ class ChannelPage extends React.Component {
 
     enterChannel = (channelID, channelName) => {
         this.setState({ selectedChannelID: channelID, selectedChannelName: channelName, active: true })
-        console.log(channelID)
-        console.log(this.state.selectedChannelID)
-        //setInterval(() => {
+        
         axios.get('/api/messages/' + channelID).then((response) => {
-            console.log('enter channel response')
-            console.log(response)
+        
             if (response.data.length === 0) {
                 this.setState({ messages: [{ messageBody: 'This is the beginning of the conversation...' }] })
-                console.log(this.state.messages)
             }
             else {
                 // let message = {
@@ -115,7 +104,6 @@ class ChannelPage extends React.Component {
                 // }
                 this.setState({ messages: response.data })
             }
-            console.log(this.state.messages)
         })
         this.props.setAppState(channelID, channelName)
         //}, 2000)
@@ -124,23 +112,18 @@ class ChannelPage extends React.Component {
 
 
     setChannelState = (message) => {
-
         this.state.messages.push(message)
         this.setState({ messages: this.state.messages })
-        console.log(this.state.messages)
-
     }
 
     deleteChannel = channelID => {
         let remainingChannels = this.state.channels.filter((channel) => {
             return channel._id !== channelID;
         })
-        console.log(remainingChannels)
         this.setState({ channels: remainingChannels, messages: [] })
         this.props.setAppState('', '')
         axios.delete('/api/channel/' + channelID)
             .then(function (response) {
-                console.log(response)
             })
     }
 

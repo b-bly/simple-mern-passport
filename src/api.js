@@ -4,7 +4,7 @@ const socket = io("http://localhost:8080");
 
 
 function subscribeToChat (cb) {
-    socket.on('msg', msg => { //console.log(msg)
+    socket.on('msg', msg => {
         cb(null, msg)
       })
 }
