@@ -16,7 +16,8 @@ class Signup extends Component {
 		username: '',
 		password: '',
 		confirmPassword: '',
-		redirectTo: null
+		redirectTo: null,
+		userNameTaken: ''
 	}
 
 	handleChange(event) {
@@ -25,8 +26,6 @@ class Signup extends Component {
 		})
 	}
 	handleSubmit(event) {
-		console.log('sign-up handleSubmit, username: ')
-		console.log(this.state.username)
 		event.preventDefault()
 
 		//request to server to add a new username/password
@@ -35,18 +34,13 @@ class Signup extends Component {
 			password: this.state.password
 		})
 			.then(response => {
-				console.log(response)
 				if (response.status === 200) {
-					console.log('successful signup')
-					console.log(response)
 					axios
 						.post('/user/login', {
 							username: this.state.username,
 							password: this.state.password
 						})
 						.then(response => {
-							console.log('login response: ')
-							console.log(response.data)
 							if (response.status === 200) {
 								// update App.js state
 								this.props.updateUser({
@@ -57,17 +51,13 @@ class Signup extends Component {
 							}
 							this.setState({ redirectTo: '/channels' })
 						}).catch(error => {
-							console.log('login error: ')
-							console.log(error);
+							this.setState({userNameTaken: "Username already taken"})
 
 						})
 				} else {
-					console.log('username already taken')
 				}
 			}).catch(error => {
-				console.log('signup error: ')
 				console.log(error)
-
 			})
 	}
 
@@ -107,6 +97,7 @@ class Signup extends Component {
 									value={this.state.password}
 									onChange={this.handleChange}
 								/>
+								<p style={{color: 'red'}}>{this.state.userNameTaken}</p>
 							</div>
 						</div>
 						<div className="form-group ">

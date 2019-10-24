@@ -44,6 +44,11 @@
     background: none;
     border: none;
 }
+.logout-button-div {
+    position: fixed;
+    margin-left: 63vw;
+    margin-top: -7vh;
+}
 
 #logout-button:hover {
     cursor: pointer;
@@ -51,4 +56,21 @@
 
 #current-channel {
     font-size: 0.9rem;
+}
+
+#invite-response {
+    width: 100%;
+    font-size: 13px;
+}
+
+.nav-info {
+    width: 500px;
+}
+
+.green {
+    color: lime;
+}
+
+.red {
+    color: red;
 }

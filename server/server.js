@@ -48,10 +48,10 @@ io.on('connection', (socket) => {
 	socket.removeAllListeners();
 	console.log('made socket connection', socket.id);
 	// Handle chat event
-	socket.on('chat', function(data){
+	socket.on('msg', function(data){
 		console.log("socket data")
 		console.log(data);
-		socket.broadcast.emit('chat', data);
+		io.emit('msg', data);
 		return MessageModel.create({
 			"channelName": data.channelName,
 			"sender": data.sender,
@@ -66,6 +66,7 @@ io.on('connection', (socket) => {
 	});
 	// Handle typing event
 	socket.on('typing', function(data){
+		console.log('user is typing')
 		socket.broadcast.emit('typing', data);
 	});
  });
