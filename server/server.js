@@ -10,7 +10,6 @@ const PORT = process.env.PORT || 8080;
 const socket = require('socket.io')
 // Route requires
 const user = require('./routes/user')
-const UserModel = require('./database/models/user')
 const ChannelModel = require('./database/models/channel')
 const MessageModel = require('./database/models/message')
 const channel = require('./routes/channel')

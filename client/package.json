@@ -1,0 +1,28 @@
+{
+	"name": "client",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"axios": "^0.19.0",
+		"react": "^16.2.0",
+		"react-dom": "^16.2.0",
+		"react-router-dom": "^4.2.2",
+		"react-scripts": "1.1.0"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	],
+	"proxy": "http://localhost:8080"
+}

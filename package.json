@@ -22,10 +22,11 @@
     "spectre.css": "^0.5.0"
   },
   "engines": {
-    "node": "10.15.3"
+    "node": "10.15.3",
+    "npm": "6.x"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"nodemon server/server.js\"",
+    "start": "concurrently \"cd client && react-scripts start\" \"nodemon server/server.js\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
