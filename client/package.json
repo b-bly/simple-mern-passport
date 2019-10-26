@@ -8,8 +8,7 @@
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
 		"react-router-dom": "^4.2.2",
-		"react-scripts": "2.1.8",
-		"socket.io-client": "^2.3.0"
+		"react-scripts": "2.1.8"
 	},
 	"engines": {
 		"node": "10.15.3",
