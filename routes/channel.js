@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const Channel = require('../database/models/channel')
-const User = require('../database/models/user')
-const Message = require('../database/models/message')
+const Channel = require('../models/channel')
+const User = require('../models/user')
+const Message = require('../models/message')
 
 router.post('/channel', (req, res) => {
     console.log('req.body: ')

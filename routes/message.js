@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const Message = require('../database/models/message')
-const Channel = require('../database/models/channel')
+const Message = require('../models/message')
+const Channel = require('../models/channel')
 
 router.post('/messages/:channelID', (req, res) => {
 

@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const session = require('express-session')
-const dbConnection = require('./database') 
+const dbConnection = require('./models') 
 const MongoStore = require('connect-mongo')(session)
 const passport = require('./passport');
 const app = express();
@@ -10,8 +10,8 @@ const PORT = process.env.PORT || 8080;
 const socket = require('socket.io')
 // Route requires
 const user = require('./routes/user')
-const ChannelModel = require('./database/models/channel')
-const MessageModel = require('./database/models/message')
+const ChannelModel = require('./models/channel')
+const MessageModel = require('./models/message')
 const channel = require('./routes/channel')
 const message = require('./routes/message')
 

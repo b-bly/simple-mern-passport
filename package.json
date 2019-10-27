@@ -14,9 +14,8 @@
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "react-scripts": "react-scripts@>=2.0.0",
+    "react-scripts": "2.0.0",
     "socket.io": "^2.2.0",
-    "socket.io-client": "^2.3.0",
     "spectre.css": "^0.5.0"
   },
   "engines": {
@@ -24,12 +23,12 @@
     "npm": "6.x"
   },
   "scripts": {
-    "start": "concurrently \"cd client && react-scripts start\" \"nodemon server/server.js\"",
+    "start": "concurrently \"cd client && react-scripts start\" \"nodemon server.js\"",
     "build": "cd client && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "api": "nodemon ./server/server.js",
-    "dev": "concurrently \"react-scripts start\" \"nodemon server/server.js\""
+    "dev": "concurrently \"cd client && react-scripts start\" \"nodemon server.js\""
   },
   "devDependencies": {
     "concurrently": "^3.5.1",
