@@ -3,18 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/runtime": "^7.6.3",
     "axios": "^0.19.0",
+    "react-scripts": "3.1.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "connect-mongo": "^2.0.1",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
+    "if-env": "^1.0.4",
     "mongoose": "^5.7.4",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "react-scripts": "2.0.0",
     "socket.io": "^2.2.0",
     "spectre.css": "^0.5.0"
   },
@@ -22,17 +22,18 @@
     "node": "10.15.3",
     "npm": "6.x"
   },
-  "scripts": {
-    "start": "concurrently \"cd client && react-scripts start\" \"nodemon server.js\"",
-    "build": "cd client && react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "api": "nodemon ./server/server.js",
-    "dev": "concurrently \"cd client && react-scripts start\" \"nodemon server.js\""
-  },
   "devDependencies": {
-    "concurrently": "^3.5.1",
-    "nodemon": "^1.17.5"
+    "concurrently": "^4.1.2",
+    "nodemon": "^1.19.3"
+  },
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"cd client && react-scripts start\" \"nodemon server.js\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "proxy": "http://localhost:8080"
 }
