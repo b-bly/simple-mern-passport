@@ -1,8 +1,7 @@
-## Simple MERN Passport Template
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+## ChatSpace 2.0
+ChatSpace 2.0 was developed as the third group project for University of Richmond Bootcamp (May-October 2019).
 
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+ChatSpace 2.0 serves as a Discord or Slack lite app by allowing for instant messaging across groups, from one person to another. The concept of this app is to build something that is relatable to the world of Web Development, that is user friendly and possesses entertainment value for users who may be outside the development world.
 
 # About
 I couldn't find a simple MERN passport tutorial, so I made one!
