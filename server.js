@@ -109,4 +109,3 @@ app.use(passport.session()) // calls the deserializeUser
 app.use('/user', user)
 app.use('/api', channel)
 app.use('/api', message)
-
