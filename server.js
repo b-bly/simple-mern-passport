@@ -2,7 +2,6 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const session = require('express-session')
-const dbConnection = require('./models') 
 const MongoStore = require('connect-mongo')(session)
 const passport = require('./passport');
 const app = express();
@@ -14,6 +13,7 @@ const ChannelModel = require('./models/channel')
 const MessageModel = require('./models/message')
 const channel = require('./routes/channel')
 const message = require('./routes/message')
+const mongoose = require('mongoose')
 
 // Starting Server 
 const server = app.listen(PORT, () => {
@@ -38,6 +38,26 @@ app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Serve up static assets (usually on heroku)
+
+mongoose.Promise = global.Promise
+
+//your local database url
+//27017 is the default mongoDB port
+const uri = process.env.MONGOD_URI || 'mongodb://localhost:27017/ChatSpace' 
+
+mongoose.connect(uri).then(
+    () => { 
+        /** ready to use. The `mongoose.connect()` promise resolves to undefined. */ 
+        console.log('Connected to Mongo');
+        
+    },
+    err => {
+         /** handle initial connection error */ 
+         console.log('error connecting to Mongo: ')
+         console.log(err);
+         
+        }
+  );
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
@@ -74,7 +94,7 @@ io.on('connection', (socket) => {
 app.use(
 	session({
 		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
-		store: new MongoStore({ mongooseConnection: dbConnection }),
+		store: new MongoStore({ mongooseConnection: mongoose.connection }),
 		resave: false, //required
 		saveUninitialized: false //required
 	})
