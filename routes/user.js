@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const User = require('../database/models/user')
+const User = require('../models/user')
 const passport = require('../passport')
-const Channel = require('../database/models/channel')
+const Channel = require('../models/channel')
 
 router.post('/', (req, res) => {
     console.log('user signup');

@@ -2,7 +2,7 @@ import React from 'react'
 import './MessageBox.css'
 import io from 'socket.io-client';
 import { subscribeToChat, listenForTyping } from '../../api'
-const socket = io("http://localhost:8080");
+const socket = io();
 
 
 
