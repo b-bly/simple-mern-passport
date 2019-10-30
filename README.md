@@ -16,4 +16,4 @@ Ashlie Johnson, Brady Douthit, Charles Mercer, and Cory W.
 
 ## Acknowledgments
 
-Huge shout-out to the creator of this repo https://github.com/b-bly/simple-mern-passport for the much needed time saver on this project.
+Huge shout-out to the creator of this repo https://github.com/b-bly/simple-mern-passport for giving us a basic setup to save some time on this project.
