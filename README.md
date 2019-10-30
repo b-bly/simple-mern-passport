@@ -8,11 +8,18 @@ ChatSpace 2.0 serves as a Discord or Slack lite app by allowing for instant mess
 
 ## Built With
 
-Mongo, Express, ReactJS, Node.js, Javascript. 
+* `Axios`  
+* `bcryptJS`  
+* `Express`  
+* `Express-session`  
+* `Passport`  
+* `MongoDB`  
+* `Socket.io`  
+* `React`  
 
-## Authors
+## Written By
 
-Ashlie Johnson, Brady Douthit, Charles Mercer, and Cory W.
+"The ABC's": Ashlie Johnson, Brady Douthit, Charles Mercer, and Cory W.
 
 ## Acknowledgments
 
