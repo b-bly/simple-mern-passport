@@ -1,4 +1,5 @@
 ## ChatSpace 2.0
+###### Deployed version: https://sleepy-island-09705.herokuapp.com/  
 ChatSpace 2.0 was developed as the third group project for University of Richmond Bootcamp (May-October 2019).
 
 ChatSpace 2.0 serves as a Discord or Slack lite app by allowing for instant messaging across groups, from one person to another. The concept of this app is to build something that is relatable to the world of Web Development, that is user friendly and possesses entertainment value for users who may be outside the development world.
