@@ -1,0 +1,76 @@
+.channels-navbar {
+    position: fixed;
+    display: flex;
+    width: 75%;
+    height: 25vh;
+    margin-left: 25%;
+    background-image: url('../../images/space.JPG');
+}
+#invite-input {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left: 1px solid white;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+    background: rgba(0, 0, 0, 0);
+    width: 70%
+}
+
+#invite-input:focus {
+    outline: 0;
+}
+
+#invite-button {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: none;
+    border-right: 1px solid white;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    cursor: pointer;
+    width: 30%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0);
+    color: white;
+    top: 0;
+}
+
+#invite-button:active {
+    border-color: lime;
+    color: lime;
+}
+#logout-button {
+    background: none;
+    border: none;
+}
+.logout-button-div {
+    position: fixed;
+    margin-left: 63vw;
+    margin-top: -7vh;
+}
+
+#logout-button:hover {
+    cursor: pointer;
+}
+
+#current-channel {
+    font-size: 0.9rem;
+}
+
+#invite-response {
+    width: 100%;
+    font-size: 13px;
+}
+
+.nav-info {
+    width: 500px;
+}
+
+.green {
+    color: lime;
+}
+
+.red {
+    color: red;
+}

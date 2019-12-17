@@ -1,0 +1,38 @@
+#message-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    height: 15vh;
+    margin-left: 25%;
+    z-index: 1;
+    background-image: url(../../images/space.JPG);
+}
+
+#send {
+    height: 100%;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    padding: 0 30px;
+    background: rgba(0, 0, 0, 0);
+    border-color: white;
+    color: white;
+}
+
+#send:active {
+    border-color: red;
+    color: red;
+}
+
+#input-and-button {
+    width: 95%;
+    margin-top: 1rem;
+}
+
+#message-input {
+    height: 50%;
+    border-width:0px;
+    border: 1px solid white;
+    background: rgba(0, 0, 0, 0);
+    color: white;
+}

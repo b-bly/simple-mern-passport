@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css?family=Coming+Soon|Itim|Kaushan+Script|Neucha|Pangolin|Rancho|Turret+Road&display=swap');
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-family: 'Rancho', cursive;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.navbar {
+  margin-top: auto;
+}
+
+#top-filler {
+  margin-bottom: auto;
+}
+
+#nav-container {
+  align-items: center;
+}
+
+button:focus {
+  outline: 0;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.title {
+  margin-left: 43%;
+  margin-right: 57%;
+  font-size: 72px;
+  }
+
+  .sizeNav {
+    background-image: url('./images/space.JPG');
+  }
+  
+  @media (max-width: 600px){
+  .title {
+  margin-left:0px;
+  }
+  
+  } 

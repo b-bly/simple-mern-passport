@@ -1,0 +1,24 @@
+#message-div p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin: 0;
+    z-index: 0;
+    margin-left: 15px
+}
+
+#message-div {
+    display: flex;
+}
+
+#sender {
+    text-align: left;
+    font-weight: bold;
+}
+
+#message-body {
+    text-align: left;
+}
+
+#no-messages {
+    margin-right: 15px
+}
