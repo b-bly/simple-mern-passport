@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
+import './components/ChannelPage/ChannelPage.css'
+import { Redirect } from 'react-router-dom'
 // components
-import Signup from './components/sign-up'
-import LoginForm from './components/login-form'
-import Navbar from './components/navbar'
-import Home from './components/home'
+import Signup from './components/SignUp/sign-up'
+import LoginForm from './components/LoginForm/login-form'
+import ChannelPage from './components/ChannelPage/ChannelPage'
+import ChannelsNav from './components/ChannelsNav/ChannelsNav'
 
 class App extends Component {
   constructor() {
     super()
+
     this.state = {
       loggedIn: false,
-      username: null
+      username: null,
+      userID: null,
+      selectedChannelID: '',
+      selectedChannelName: '',
     }
 
     this.getUser = this.getUser.bind(this)
@@ -20,27 +26,33 @@ class App extends Component {
     this.updateUser = this.updateUser.bind(this)
   }
 
+    
   componentDidMount() {
     this.getUser()
   }
 
-  updateUser (userObject) {
+  updateUser(userObject) {
     this.setState(userObject)
+  }
+
+  redirect() {
+    return (<Redirect to="/" />);
+  }
+
+  setAppState = (channelID, channelName) => {
+    this.setState({ selectedChannelID: channelID, selectedChannelName: channelName })
   }
 
   getUser() {
     axios.get('/user/').then(response => {
-      console.log('Get user response: ')
-      console.log(response.data)
       if (response.data.user) {
-        console.log('Get User: There is a user saved in the server session: ')
 
         this.setState({
           loggedIn: true,
-          username: response.data.user.username
+          username: response.data.user.username,
+          userID: response.data.user._id
         })
       } else {
-        console.log('Get user: no user');
         this.setState({
           loggedIn: false,
           username: null
@@ -52,29 +64,39 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-   
-        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
-        {/* greet user if logged in: */}
-        {this.state.loggedIn &&
-          <p>Join the party, {this.state.username}!</p>
-        }
-        {/* Routes to different components */}
+
         <Route
           exact path="/"
-          component={Home} />
+          render={() =>
+            <LoginForm
+              updateUser={this.updateUser}
+              loggedIn={this.state.loggedIn}
+            />}
+          />
         <Route
           path="/login"
           render={() =>
             <LoginForm
               updateUser={this.updateUser}
+              loggedIn={this.state.loggedIn}
             />}
         />
         <Route
           path="/signup"
           render={() =>
-            <Signup/>}
+            <Signup updateUser={this.updateUser} />}
         />
-
+        {/* route for channels */}
+        <Route
+          path="/channels"
+          render={() =>
+            //render channels
+            <div>
+              <ChannelsNav selectedChannelID={this.state.selectedChannelID} selectedChannelName={this.state.selectedChannelName} updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+              <ChannelPage setAppState={this.setAppState} updateUser={this.updateUser} loggedIn={this.state.loggedIn} userID={this.state.userID} user={this.state.username} />
+            </div>
+          }
+        />
       </div>
     );
   }

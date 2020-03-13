@@ -1,0 +1,166 @@
+/* #channels-container {
+    margin-left:25%
+}
+.sidebar {
+
+    width:25%
+}
+
+.messages {
+    overflow: auto;
+} */
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    padding: 10px 16px;
+ }
+ .sidenav {
+    height: 100%;
+    width: 25%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-image: url('../../images/space2.JPG');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+    color: white;
+    padding-top: 100px;
+    border: 1px solid white;
+  }
+  ​
+  .sidenav p {
+    padding: 10px;
+  }
+
+  #sidenav-ul {
+    margin: 0 auto;
+  }
+
+  .inp {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-right-width: 1px;
+    border-left: 1px solid white;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    margin-bottom: 30px;
+    background: rgba(0, 0, 0, 0);
+    color: white;
+    height: 100%;
+    width: 70%
+  }
+
+  .inp:focus {
+    outline: 0;
+  }
+
+  .bttn {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-right: 1px solid white;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    border-left: none;
+    cursor: pointer;
+    height: 100%;
+    width: 30%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0);
+    color: white;
+  }
+  .bttn:active {
+    border-color: lime;
+    color: lime;
+  }
+
+  .channel-delete {
+    border: none;
+    background: none;
+    float: right;
+    color: black;
+  }
+
+  .channel-delete:hover {
+    cursor: pointer;
+    color: red;
+  }
+
+  .channel-delete:active {
+    color: black;
+  }
+
+  .channel-group  {
+    display: flex;
+    justify-content: center;
+    background: none;
+    border: 1px solid white;
+    list-style: none;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 5px;
+    width: 80%;
+    margin: 10px auto;
+  }
+  .channel-group:hover {
+    cursor: pointer;
+    opacity: .2;
+    background-color: white;
+    color: black;
+  }
+
+  .channel-group li {
+    width: 70%;
+    margin-bottom: 0.4rem;
+  }
+
+  .active-channel {
+    display: flex;
+    justify-content: center;
+    background: none;
+    border: 1px solid white;
+    list-style: none;
+    font-size: 18px;
+    background-color: white;
+    color: black;
+    opacity: 0.2;
+    border-radius: 5px;
+    width: 80%;
+    margin: 10px auto;
+  }
+
+  .active-channel:hover {
+    cursor: pointer;
+  }
+  #add-channel-div {
+    width: 80%;
+    height: 40px;
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0 auto;
+  }
+
+  #message-output {
+    position: fixed;
+    margin-left: 25%;
+    margin-top: 25vh;
+    height: 60vh;
+    width: 75%;
+    overflow-y: auto;
+    z-index: 888;
+  }
+
+  #channel-error {
+    color: red;
+  }
+
+  #existing-channels {
+    margin-top: 20px
+  }
+
+  
