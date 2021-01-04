@@ -40,8 +40,7 @@ app.use(express.json());
 // Serve up static assets (usually on heroku)
 
 mongoose.Promise = global.Promise
-console.log("ATLAS USERNAME")
-console.log(process.env.ATLAS_USER)
+
 const uri = process.env.MONGOD_URI || 'mongodb+srv://ChatspaceAdmin:ejza7i7sHmceybLY@chatspace.cqsmx.mongodb.net/chats?retryWrites=true&w=majority' 
 
 mongoose.connect(uri).then(
