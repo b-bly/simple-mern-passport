@@ -16,21 +16,6 @@ const message = require('./routes/message')
 const mongoose = require('mongoose')
 const path = require('path');
 
-if (process.env.NODE_ENV === 'production') {
-	app.get("*", (req, res) => {
-		res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-	});	
-}
-// Starting Server 
-const server = app.listen(PORT, () => {
-	console.log(`App listening on PORT: ${PORT}`)
-})
-
-//Socket.io
-// const server = require("http").Server(app);
-const io = socket(server);
-// const handlers = require('./handlers.js')(app, server, io);
-
 // MIDDLEWARE
 app.use(morgan('dev'))
 app.use(
@@ -43,6 +28,42 @@ app.use(bodyParser.json())
 //Socket Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Sessions
+app.use(
+	session({
+		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+		store: new MongoStore({ mongooseConnection: mongoose.connection }),
+		resave: false, //required
+		saveUninitialized: false //required
+	})
+)
+
+// Passport
+app.use(passport.initialize())
+app.use(passport.session()) // calls the deserializeUser
+
+
+// Routes
+app.use('/user', user)
+app.use('/api', channel)
+app.use('/api', message)
+
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static(__dirname + "client/build"));
+
+	app.get("*", (req, res) => {
+		res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+	});	
+}
+// Starting Server 
+const server = app.listen(PORT, () => {
+	console.log(`App listening on PORT: ${PORT}`)
+})
+
+//Socket.io
+const io = socket(server);
+
 // Serve up static assets (usually on heroku)
 
 mongoose.Promise = global.Promise
@@ -60,9 +81,6 @@ mongoose.connect(uri).then(
          console.log(err);
         }
   );
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(__dirname + "client/build"));
-}
 
 //Socket Connection
 io.on('connection', (socket) => {
@@ -91,23 +109,3 @@ io.on('connection', (socket) => {
 		socket.broadcast.emit('typing', data);
 	});
  });
-
-// Sessions
-app.use(
-	session({
-		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
-		store: new MongoStore({ mongooseConnection: mongoose.connection }),
-		resave: false, //required
-		saveUninitialized: false //required
-	})
-)
-
-// Passport
-app.use(passport.initialize())
-app.use(passport.session()) // calls the deserializeUser
-
-
-// Routes
-app.use('/user', user)
-app.use('/api', channel)
-app.use('/api', message)
