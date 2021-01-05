@@ -53,7 +53,7 @@ if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(__dirname + "client/build"));
 
 	app.get("*", (req, res) => {
-		res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+		res.sendFile(path.join(__dirname, "client/build"));
 	});	
 }
 // Starting Server 
@@ -80,7 +80,9 @@ mongoose.connect(uri).then(
          console.log('error connecting to Mongo: ')
          console.log(err);
         }
-  );
+  ).catch(err => {
+	  console.log(err)
+  });
 
 //Socket Connection
 io.on('connection', (socket) => {
