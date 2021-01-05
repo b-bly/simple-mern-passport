@@ -52,9 +52,9 @@ app.use('/api', message)
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(__dirname + "client/build"));
 
-	app.get("*", (req, res) => {
-		res.sendFile(path.join(__dirname, "client/build"));
-	});	
+	app.get('*', (req, res) => {
+		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+	});
 }
 // Starting Server 
 const server = app.listen(PORT, () => {
@@ -68,28 +68,28 @@ const io = socket(server);
 
 mongoose.Promise = global.Promise
 
-const uri = process.env.MONGOD_URI || 'mongodb+srv://ChatspaceAdmin:ejza7i7sHmceybLY@chatspace.cqsmx.mongodb.net/chats?retryWrites=true&w=majority' 
+const uri = process.env.MONGOD_URI || 'mongodb+srv://ChatspaceAdmin:ejza7i7sHmceybLY@chatspace.cqsmx.mongodb.net/chats?retryWrites=true&w=majority'
 
 mongoose.connect(uri).then(
-    () => { 
-        /** ready to use. The `mongoose.connect()` promise resolves to undefined. */ 
-        console.log('Connected to Mongo');
-    },
-    err => {
-         /** handle initial connection error */ 
-         console.log('error connecting to Mongo: ')
-         console.log(err);
-        }
-  ).catch(err => {
-	  console.log(err)
-  });
+	() => {
+		/** ready to use. The `mongoose.connect()` promise resolves to undefined. */
+		console.log('Connected to Mongo');
+	},
+	err => {
+		/** handle initial connection error */
+		console.log('error connecting to Mongo: ')
+		console.log(err);
+	}
+).catch(err => {
+	console.log(err)
+});
 
 //Socket Connection
 io.on('connection', (socket) => {
 	socket.removeAllListeners();
 	console.log('made socket connection', socket.id);
 	// Handle chat event
-	socket.on('msg', function(data){
+	socket.on('msg', function (data) {
 		console.log("socket data")
 		console.log(data);
 		io.emit('msg', data);
@@ -101,13 +101,13 @@ io.on('connection', (socket) => {
 		}).then(function (message) {
 			// console.log('message: ')
 			// console.log(message)
-			
+
 			return ChannelModel.findOneAndUpdate({ _id: message.channelID }, { $push: { messages: message._id } }, { new: true })
 		})
 	});
 	// Handle typing event
-	socket.on('typing', function(data){
+	socket.on('typing', function (data) {
 		console.log('user is typing')
 		socket.broadcast.emit('typing', data);
 	});
- });
+});
